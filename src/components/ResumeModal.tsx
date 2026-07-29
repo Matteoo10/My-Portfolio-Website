@@ -69,11 +69,11 @@ TECHNICAL SKILLS
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-zinc-950/90 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
-      <div className="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl relative">
+    <div className="fixed inset-0 z-50 bg-zinc-950/90 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 overflow-y-auto print:static print:bg-white print:p-0 print:block">
+      <div className="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl relative print:bg-white print:border-none print:shadow-none print:max-h-none print:static print:w-full print:p-0">
         
         {/* Top Controls Header */}
-        <div className="p-4 bg-zinc-950 border-b border-zinc-800 flex items-center justify-between shrink-0 font-sans">
+        <div className="p-4 bg-zinc-950 border-b border-zinc-800 flex items-center justify-between shrink-0 font-sans print:hidden">
           <div className="flex items-center space-x-2">
             <FileText className="w-5 h-5 text-cyan-400" />
             <h3 className="font-serif font-bold text-base text-zinc-100">
@@ -205,7 +205,7 @@ TECHNICAL SKILLS
             </h3>
             <div className="flex justify-between items-baseline font-bold text-slate-900">
               <span className="text-sm">Universidad de Manila</span>
-              <span className="text-xs text-slate-600">2021 - 2025</span>
+              <span className="text-xs text-slate-600" style={{ whiteSpace: 'nowrap', flexShrink: 0 }}>2021 - 2025</span>
             </div>
             <div className="font-semibold text-slate-800">Bachelor of Science in Information Technology</div>
             <div className="text-slate-600 text-xs mt-1">

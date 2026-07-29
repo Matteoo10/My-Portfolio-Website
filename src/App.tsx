@@ -45,31 +45,33 @@ export default function App() {
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans selection:bg-cyan-500 selection:text-zinc-950">
       
-      {/* Top Navbar */}
-      <Navbar
-        onOpenResume={() => setIsResumeModalOpen(true)}
-        activeSection={activeSection}
-        setActiveSection={setActiveSection}
-      />
+      <div className="print:hidden">
+        {/* Top Navbar */}
+        <Navbar
+          onOpenResume={() => setIsResumeModalOpen(true)}
+          activeSection={activeSection}
+          setActiveSection={setActiveSection}
+        />
 
-      {/* Hero Header */}
-      <Hero
-        onOpenResume={() => setIsResumeModalOpen(true)}
-      />
+        {/* Hero Header */}
+        <Hero
+          onOpenResume={() => setIsResumeModalOpen(true)}
+        />
 
-      {/* Work Experience & Education Timeline */}
-      <ExperienceTimeline />
+        {/* Work Experience & Education Timeline */}
+        <ExperienceTimeline />
 
-      {/* Technical Skills & Interactive CLI */}
-      <SkillsMatrix
-        onOpenResume={() => setIsResumeModalOpen(true)}
-      />
+        {/* Technical Skills & Interactive CLI */}
+        <SkillsMatrix
+          onOpenResume={() => setIsResumeModalOpen(true)}
+        />
 
-      {/* Projects Showcase & Wireframe Demos */}
-      <ProjectsShowcase />
+        {/* Projects Showcase & Wireframe Demos */}
+        <ProjectsShowcase />
 
-      {/* Contact & Direct Dispatch */}
-      <ContactSection />
+        {/* Contact & Direct Dispatch */}
+        <ContactSection />
+      </div>
 
       {/* Printable/Downloadable Resume Modal */}
       <ResumeModal

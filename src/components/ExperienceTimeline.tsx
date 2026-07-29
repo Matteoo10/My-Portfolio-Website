@@ -118,7 +118,7 @@ export const ExperienceTimeline: React.FC = () => {
                     {education.institution}
                   </p>
                 </div>
-                <span className="text-xs font-mono px-2.5 py-1 rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-300">
+                <span className="text-xs font-mono px-2.5 py-1 rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-300" style={{ whiteSpace: 'nowrap', flexShrink: 0 }}>
                   {education.period}
                 </span>
               </div>

@@ -11,7 +11,7 @@ interface SkillsMatrixProps {
   onOpenResume?: () => void;
 }
 
-export const SkillsMatrix: React.FC<SkillsMatrixProps> = () => {
+export const SkillsMatrix: React.FC<SkillsMatrixProps> = ({ onOpenResume }) => {
   const getCategoryIcon = (category: string) => {
     switch(category) {
       case 'Networking & Infrastructure': return <Network className="w-5 h-5 text-cyan-400" />;
@@ -86,6 +86,18 @@ export const SkillsMatrix: React.FC<SkillsMatrixProps> = () => {
             </div>
           ))}
         </div>
+
+        {/* View Detailed Resume Action */}
+        {onOpenResume && (
+          <div className="mt-12 text-center">
+            <button
+              onClick={onOpenResume}
+              className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-200 hover:text-cyan-300 transition-all shadow-md cursor-pointer"
+            >
+              <span>View Full Printable Resume Spec</span>
+            </button>
+          </div>
+        )}
 
       </div>
     </section>

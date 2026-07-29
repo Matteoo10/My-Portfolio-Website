@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { personalInfo } from '../data/resumeData';
 import { 
   ShieldCheck, 
@@ -6,10 +6,7 @@ import {
   Mail, 
   Phone, 
   Download, 
-  ArrowRight,
-  Camera,
-  Upload,
-  UserCheck
+  ArrowRight
 } from 'lucide-react';
 
 interface HeroProps {
@@ -19,24 +16,7 @@ interface HeroProps {
 export const Hero: React.FC<HeroProps> = ({
   onOpenResume
 }) => {
-  const [userPhoto, setUserPhoto] = useState<string>(() => {
-    return localStorage.getItem('christian_dator_photo') || personalInfo.profileImage || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800';
-  });
-
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const result = reader.result as string;
-        setUserPhoto(result);
-        localStorage.setItem('christian_dator_photo', result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  const [userPhoto] = useState<string>(personalInfo.profileImage);
 
   const scrollToContact = () => {
     const el = document.getElementById('contact');
@@ -56,21 +36,8 @@ export const Hero: React.FC<HeroProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* Left Column: Text Content & Bio */}
-          <div className="lg:col-span-7 space-y-6">
+          <div className="lg:col-span-6 space-y-6">
             
-            {/* Top Status Badge */}
-            <div className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-zinc-900 border border-zinc-800/90 shadow-sm">
-              <span className="flex h-2 w-2 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </span>
-              <span className="text-xs font-mono font-semibold text-emerald-400 uppercase tracking-wider">
-                Junior IT Analyst @ Five Star Bus Co.
-              </span>
-              <span className="text-zinc-600">•</span>
-              <span className="text-xs text-zinc-300 font-medium">Quezon City, PH</span>
-            </div>
-
             {/* Name & Title with Serif Display */}
             <div>
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-bold tracking-tight text-zinc-100 leading-[1.1]">
@@ -156,12 +123,12 @@ export const Hero: React.FC<HeroProps> = ({
           </div>
 
           {/* Right Column: Seamless Blended Portrait */}
-          <div className="lg:col-span-5 relative flex justify-center lg:justify-end items-end h-full mt-6 lg:mt-0">
+          <div className="lg:col-span-6 relative flex justify-center lg:justify-end items-end h-full mt-6 lg:mt-0">
             {/* Radial Backlight behind portrait */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 sm:w-96 h-80 sm:h-96 bg-gradient-to-tr from-cyan-500/15 via-indigo-500/10 to-transparent rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-tr from-cyan-500/15 via-indigo-500/10 to-transparent rounded-full blur-3xl pointer-events-none" />
 
             {/* Seamless Portrait Container */}
-            <div className="relative w-full max-w-sm sm:max-w-md group">
+            <div className="relative w-full max-w-sm sm:max-w-md lg:max-w-lg group">
               
               {/* Masked Image with Smooth Edge & Bottom Fade */}
               <div className="relative overflow-hidden [mask-image:linear-gradient(to_bottom,black_65%,transparent_100%)]">
@@ -169,38 +136,12 @@ export const Hero: React.FC<HeroProps> = ({
                   src={userPhoto}
                   alt="Christian Matthew P. Dator"
                   referrerPolicy="no-referrer"
-                  className="w-full h-auto max-h-[500px] object-cover object-top filter grayscale contrast-110 brightness-105 transition-all duration-700 group-hover:grayscale-0 group-hover:scale-[1.02]"
+                  className="w-full h-auto max-h-[600px] object-cover object-top filter grayscale contrast-110 brightness-105 transition-all duration-700 group-hover:grayscale-0 group-hover:scale-[1.02]"
                 />
 
                 {/* Gradient Blend Layers into zinc-950 canvas */}
                 <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/30 to-transparent pointer-events-none" />
                 <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/40 via-transparent to-zinc-950/40 pointer-events-none" />
-              </div>
-
-              {/* Upload Floating Button */}
-              <div className="absolute bottom-4 right-2 z-20">
-                <button
-                  onClick={() => fileInputRef.current?.click()}
-                  className="px-3 py-1.5 rounded-full bg-zinc-900/90 hover:bg-zinc-800 text-zinc-300 hover:text-cyan-300 border border-zinc-700/80 shadow-xl text-xs font-mono flex items-center space-x-1.5 transition-all opacity-80 group-hover:opacity-100 backdrop-blur-md cursor-pointer"
-                  title="Upload or change photo"
-                >
-                  <Camera className="w-3.5 h-3.5 text-cyan-400" />
-                  <span>Upload / Change Photo</span>
-                </button>
-
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  onChange={handlePhotoUpload}
-                  accept="image/*"
-                  className="hidden"
-                />
-              </div>
-
-              {/* Status Indicator Tag floating seamlessly */}
-              <div className="absolute top-2 right-2 z-20 px-2.5 py-1 rounded-full bg-zinc-950/80 border border-emerald-500/30 text-[11px] font-mono text-emerald-400 flex items-center space-x-1.5 shadow-md backdrop-blur-md">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                <span>ONLINE</span>
               </div>
 
             </div>

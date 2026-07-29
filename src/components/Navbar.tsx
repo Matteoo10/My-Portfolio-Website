@@ -43,18 +43,11 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         
         {/* Brand & Status */}
-        <div className="flex items-center space-x-3 cursor-pointer" onClick={() => handleNavClick('hero')}>
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-zinc-800 via-zinc-900 to-zinc-950 flex items-center justify-center text-zinc-100 font-serif font-bold text-lg shadow-md shadow-black/50 border border-zinc-700/60 ring-1 ring-white/10">
-            CD
-          </div>
+        <div className="flex items-center cursor-pointer" onClick={() => handleNavClick('hero')}>
           <div>
             <div className="flex items-center space-x-2">
               <span className="font-serif font-bold text-zinc-100 tracking-tight text-base sm:text-lg">
                 Christian Dator
-              </span>
-              <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse mr-1.5" />
-                Active IT Analyst
               </span>
             </div>
             <p className="text-xs text-zinc-400 hidden sm:block font-sans">
@@ -85,16 +78,6 @@ export const Navbar: React.FC<NavbarProps> = ({
           })}
         </nav>
 
-        {/* Action Buttons */}
-        <div className="hidden lg:flex items-center space-x-2">
-          <button
-            onClick={onOpenResume}
-            className="flex items-center space-x-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-zinc-100 text-zinc-950 shadow-md hover:bg-white transition-all border border-zinc-200"
-          >
-            <FileText className="w-3.5 h-3.5" />
-            <span>Resume</span>
-          </button>
-        </div>
 
         {/* Mobile menu button */}
         <div className="flex md:hidden items-center space-x-2">
