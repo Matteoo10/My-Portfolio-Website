@@ -60,14 +60,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
                 <span>Let's collaborate</span>
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </button>
-              <div>
-                <button
-                  onClick={onOpenResume}
-                  className="text-sm font-medium text-[#525252] hover:text-[#0a0a0a] underline underline-offset-4 transition-colors"
-                >
-                  View Resume →
-                </button>
-              </div>
+
             </div>
 
           </div>
