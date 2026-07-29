@@ -42,7 +42,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
         <div className="grid grid-cols-12 gap-4 h-full items-end pb-12 pt-8">
 
           {/* Left: Title & Bio (3 cols) */}
-          <div className="col-span-12 lg:col-span-3 space-y-6 lg:pb-8">
+          <div className="col-span-12 lg:col-span-3 space-y-6 lg:self-center">
             <div>
               <p className="text-sm font-semibold text-[#0a0a0a] uppercase tracking-widest mb-1">
                 IT Support Specialist
