@@ -26,22 +26,15 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
 
       {/* ── Large Display Name Behind Everything ── */}
       <div
-        className="absolute inset-x-0 top-0 flex flex-col items-center justify-start pointer-events-none select-none overflow-hidden"
+        className="absolute inset-x-0 top-0 flex items-start justify-center pointer-events-none select-none overflow-hidden"
         aria-hidden="true"
       >
-        {/* First name — outline */}
         <span
-          className="font-display text-outline leading-none tracking-tight"
-          style={{ fontSize: 'clamp(5rem, 18vw, 16rem)', lineHeight: 0.88 }}
+          className="font-display leading-none tracking-tight whitespace-nowrap"
+          style={{ fontSize: 'clamp(3.5rem, 10vw, 10rem)', lineHeight: 0.88 }}
         >
-          CHRISTIAN
-        </span>
-        {/* Last name — filled */}
-        <span
-          className="font-display text-[#0a0a0a] leading-none tracking-tight"
-          style={{ fontSize: 'clamp(5rem, 18vw, 16rem)', lineHeight: 0.88 }}
-        >
-          DATOR
+          <span className="text-outline">CHRISTIAN </span>
+          <span className="text-[#0a0a0a]">DATOR</span>
         </span>
       </div>
 
