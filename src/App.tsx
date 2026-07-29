@@ -43,7 +43,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans selection:bg-cyan-500 selection:text-zinc-950">
+    <div className="min-h-screen bg-[#f5f5f0] text-[#0a0a0a] font-sans selection:bg-black selection:text-white">
       
       <div className="print:hidden">
         {/* Top Navbar */}

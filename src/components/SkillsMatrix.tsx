@@ -4,7 +4,8 @@ import {
   Terminal as TerminalIcon, 
   Network, 
   Wrench, 
-  Code2
+  Code2,
+  FileText
 } from 'lucide-react';
 
 interface SkillsMatrixProps {
@@ -14,67 +15,63 @@ interface SkillsMatrixProps {
 export const SkillsMatrix: React.FC<SkillsMatrixProps> = ({ onOpenResume }) => {
   const getCategoryIcon = (category: string) => {
     switch(category) {
-      case 'Networking & Infrastructure': return <Network className="w-5 h-5 text-cyan-400" />;
-      case 'IT Support & Administration': return <Wrench className="w-5 h-5 text-amber-400" />;
-      case 'Tools & Utilities': return <TerminalIcon className="w-5 h-5 text-indigo-400" />;
-      default: return <Code2 className="w-5 h-5 text-emerald-400" />;
+      case 'Networking & Infrastructure': return <Network className="w-5 h-5 text-[#0a0a0a]" />;
+      case 'IT Support & Administration': return <Wrench className="w-5 h-5 text-[#0a0a0a]" />;
+      case 'Tools & Utilities': return <TerminalIcon className="w-5 h-5 text-[#0a0a0a]" />;
+      default: return <Code2 className="w-5 h-5 text-[#0a0a0a]" />;
     }
   };
 
   return (
-    <section id="skills" className="py-16 bg-zinc-950 border-t border-zinc-800/80 text-zinc-100">
+    <section id="skills" className="py-20 bg-[#f5f5f0] border-t border-[#e0e0d8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center space-x-2 text-xs font-mono font-semibold text-cyan-400 uppercase tracking-wider mb-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800">
-            <TerminalIcon className="w-3.5 h-3.5 text-cyan-400" />
+        <div className="mb-14">
+          <div className="inline-flex items-center gap-2 text-xs font-medium text-[#525252] uppercase tracking-widest mb-3 px-3 py-1 rounded-full border border-[#d0d0c8] bg-white/60">
+            <TerminalIcon className="w-3.5 h-3.5" />
             <span>Technical Capabilities</span>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-serif font-bold text-zinc-100 tracking-tight">
-            Technical Skills Matrix
+          <h2 className="text-3xl sm:text-5xl font-display text-[#0a0a0a] tracking-tight">
+            Skills <span className="text-outline-thin">Matrix</span>
           </h2>
-          <p className="mt-2 text-sm sm:text-base text-zinc-400 font-sans">
+          <p className="mt-4 text-sm sm:text-base text-[#525252] max-w-xl">
             Comprehensive skill matrix covering network configuration, hardware troubleshooting, support tools, and web development.
           </p>
         </div>
 
         {/* Skills Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {skillGroups.map((group, idx) => (
             <div 
               key={idx}
-              className="bg-zinc-900/90 border border-zinc-800 rounded-2xl p-5 shadow-xl relative flex flex-col justify-between hover:border-zinc-700 transition-all"
+              className="card-hover bg-white border border-[#e0e0d8] rounded-2xl p-5 flex flex-col justify-between"
             >
               <div>
-                <div className="flex items-center space-x-3 mb-3 pb-3 border-b border-zinc-800">
-                  <div className="p-2.5 rounded-xl bg-zinc-950 border border-zinc-800">
+                <div className="flex items-center gap-3 mb-3 pb-3 border-b border-[#e0e0d8]">
+                  <div className="p-2.5 rounded-xl bg-[#f5f5f0] border border-[#e0e0d8]">
                     {getCategoryIcon(group.category)}
                   </div>
-                  <h3 className="font-serif font-bold text-sm text-zinc-100">{group.category}</h3>
+                  <h3 className="font-bold text-sm text-[#0a0a0a] leading-tight">{group.category}</h3>
                 </div>
 
-                <p className="text-xs text-zinc-400 mb-4 leading-relaxed font-sans">
-                  {group.description}
-                </p>
+                <p className="text-xs text-[#737373] mb-4 leading-relaxed">{group.description}</p>
 
-                <div className="space-y-3 font-sans">
+                <div className="space-y-3">
                   {group.skills.map((skill, i) => (
                     <div key={i} className="text-xs">
                       <div className="flex justify-between mb-1">
-                        <span className={`font-medium ${skill.highlight ? 'text-zinc-100' : 'text-zinc-300'}`}>
+                        <span className={`font-medium ${skill.highlight ? 'text-[#0a0a0a]' : 'text-[#373737]'}`}>
                           {skill.name}
                         </span>
-                        <span className="text-[10px] font-mono text-cyan-400 font-bold">
+                        <span className="text-[10px] font-mono text-[#525252] font-bold">
                           {skill.level}%
                         </span>
                       </div>
-                      <div className="w-full bg-zinc-950 rounded-full h-1.5 overflow-hidden border border-zinc-800">
+                      <div className="w-full bg-[#f0f0ea] rounded-full h-1.5 overflow-hidden">
                         <div 
-                          className={`h-full rounded-full ${
-                            skill.highlight 
-                              ? 'bg-gradient-to-r from-cyan-500 to-blue-500' 
-                              : 'bg-zinc-600'
+                          className={`h-full rounded-full transition-all ${
+                            skill.highlight ? 'bg-[#0a0a0a]' : 'bg-[#a3a3a0]'
                           }`}
                           style={{ width: `${skill.level}%` }}
                         />
@@ -87,14 +84,15 @@ export const SkillsMatrix: React.FC<SkillsMatrixProps> = ({ onOpenResume }) => {
           ))}
         </div>
 
-        {/* View Detailed Resume Action */}
+        {/* Resume CTA */}
         {onOpenResume && (
           <div className="mt-12 text-center">
             <button
               onClick={onOpenResume}
-              className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-200 hover:text-cyan-300 transition-all shadow-md cursor-pointer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-[#0a0a0a] text-white hover:bg-[#262626] transition-all"
             >
-              <span>View Full Printable Resume Spec</span>
+              <FileText className="w-4 h-4" />
+              <span>View Full Resume</span>
             </button>
           </div>
         )}

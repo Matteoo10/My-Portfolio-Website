@@ -9,8 +9,6 @@ import {
   Github, 
   Linkedin, 
   MessageSquare,
-  Clock,
-  ShieldCheck,
   Sparkles
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -39,187 +37,206 @@ export const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-16 bg-zinc-950 border-t border-zinc-800/80 text-zinc-100">
+    <section id="contact" className="py-20 bg-[#f5f5f0] border-t border-[#e0e0d8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center space-x-2 text-xs font-mono font-semibold text-cyan-400 uppercase tracking-wider mb-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800">
-            <Mail className="w-3.5 h-3.5 text-cyan-400" />
-            <span>Direct Hiring & Inquiry Channel</span>
+        <div className="mb-14">
+          <div className="inline-flex items-center gap-2 text-xs font-medium text-[#525252] uppercase tracking-widest mb-3 px-3 py-1 rounded-full border border-[#d0d0c8] bg-white/60">
+            <MessageSquare className="w-3.5 h-3.5" />
+            <span>Hiring &amp; Inquiry Channel</span>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-serif font-bold text-zinc-100 tracking-tight">
-            Get In Touch With Christian
+          <h2 className="text-3xl sm:text-5xl font-display text-[#0a0a0a] tracking-tight">
+            Get In <span className="text-outline-thin">Touch</span>
           </h2>
-          <p className="mt-2 text-sm sm:text-base text-zinc-400 font-sans">
+          <p className="mt-4 text-sm sm:text-base text-[#525252] max-w-xl">
             Currently open for Junior IT Analyst, Helpdesk Specialist, Network Support, and Web Development roles in Quezon City and remote/hybrid setups.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* Left Side: Contact Cards */}
-          <div className="lg:col-span-5 space-y-4 font-sans">
+          {/* Left Side: Contact Info */}
+          <div className="lg:col-span-5 space-y-4">
             
-            {/* Direct Email Card */}
+            {/* Direct Email */}
             <a 
               href={`mailto:${personalInfo.email}`}
-              className="p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800 hover:border-zinc-700 transition-all flex items-start space-x-4 block group"
+              className="card-hover p-5 rounded-2xl bg-white border border-[#e0e0d8] flex items-start gap-4 group block"
             >
-              <div className="p-3 rounded-xl bg-zinc-950 text-cyan-400 border border-zinc-800 group-hover:scale-105 transition-transform">
-                <Mail className="w-6 h-6" />
+              <div className="p-3 rounded-xl bg-[#f5f5f0] border border-[#e0e0d8] group-hover:bg-[#0a0a0a] group-hover:border-[#0a0a0a] transition-all">
+                <Mail className="w-5 h-5 text-[#525252] group-hover:text-white transition-colors" />
               </div>
               <div>
-                <span className="text-xs text-zinc-400 block font-mono uppercase tracking-wider">Direct Email</span>
-                <span className="text-base font-serif font-bold text-zinc-100 group-hover:text-cyan-300 transition-colors">
+                <span className="text-xs text-[#737373] block font-mono uppercase tracking-widest">Direct Email</span>
+                <span className="text-base font-bold text-[#0a0a0a] group-hover:underline transition-all">
                   {personalInfo.email}
                 </span>
-                <p className="text-xs text-zinc-400 mt-1">Prompt email responses within 24 hours.</p>
+                <p className="text-xs text-[#737373] mt-1">Prompt responses within 24 hours.</p>
               </div>
             </a>
 
-            {/* Direct Phone Card */}
+            {/* Phone */}
             <a 
               href={`tel:${personalInfo.phone}`}
-              className="p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800 hover:border-zinc-700 transition-all flex items-start space-x-4 block group"
+              className="card-hover p-5 rounded-2xl bg-white border border-[#e0e0d8] flex items-start gap-4 group block"
             >
-              <div className="p-3 rounded-xl bg-zinc-950 text-emerald-400 border border-zinc-800 group-hover:scale-105 transition-transform">
-                <Phone className="w-6 h-6" />
+              <div className="p-3 rounded-xl bg-[#f5f5f0] border border-[#e0e0d8] group-hover:bg-[#0a0a0a] group-hover:border-[#0a0a0a] transition-all">
+                <Phone className="w-5 h-5 text-[#525252] group-hover:text-white transition-colors" />
               </div>
               <div>
-                <span className="text-xs text-zinc-400 block font-mono uppercase tracking-wider">Mobile Phone / Viber</span>
-                <span className="text-base font-serif font-bold text-zinc-100 group-hover:text-emerald-300 transition-colors">
+                <span className="text-xs text-[#737373] block font-mono uppercase tracking-widest">Mobile / Viber</span>
+                <span className="text-base font-bold text-[#0a0a0a] group-hover:underline transition-all">
                   {personalInfo.phone}
                 </span>
-                <p className="text-xs text-zinc-400 mt-1">Available for calls & WhatsApp/Viber messages.</p>
+                <p className="text-xs text-[#737373] mt-1">Available for calls &amp; WhatsApp/Viber.</p>
               </div>
             </a>
 
-            {/* Location Card */}
-            <div className="p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800 flex items-start space-x-4">
-              <div className="p-3 rounded-xl bg-zinc-950 text-amber-400 border border-zinc-800">
-                <MapPin className="w-6 h-6" />
+            {/* Location */}
+            <div className="p-5 rounded-2xl bg-white border border-[#e0e0d8] flex items-start gap-4">
+              <div className="p-3 rounded-xl bg-[#f5f5f0] border border-[#e0e0d8]">
+                <MapPin className="w-5 h-5 text-[#525252]" />
               </div>
               <div>
-                <span className="text-xs text-zinc-400 block font-mono uppercase tracking-wider">Location</span>
-                <span className="text-base font-serif font-bold text-zinc-100">
-                  {personalInfo.location}
-                </span>
-                <p className="text-xs text-zinc-400 mt-1">Ready for Metro Manila site deployments.</p>
+                <span className="text-xs text-[#737373] block font-mono uppercase tracking-widest">Location</span>
+                <span className="text-base font-bold text-[#0a0a0a]">{personalInfo.location}</span>
+                <p className="text-xs text-[#737373] mt-1">Ready for Metro Manila site deployments.</p>
               </div>
             </div>
 
-            {/* Availability Badge */}
-            <div className="p-4 rounded-xl bg-emerald-950/30 border border-emerald-500/20 text-xs text-emerald-200 flex items-center space-x-3 font-sans">
-              <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0" />
+            {/* Social Links */}
+            <div className="flex gap-3">
+              <a
+                href={personalInfo.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center gap-2 p-3 rounded-xl bg-white border border-[#e0e0d8] text-sm font-medium text-[#0a0a0a] hover:bg-[#0a0a0a] hover:text-white hover:border-[#0a0a0a] transition-all"
+              >
+                <Github className="w-4 h-4" />
+                GitHub
+              </a>
+              <a
+                href={personalInfo.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center gap-2 p-3 rounded-xl bg-white border border-[#e0e0d8] text-sm font-medium text-[#0a0a0a] hover:bg-[#0a0a0a] hover:text-white hover:border-[#0a0a0a] transition-all"
+              >
+                <Linkedin className="w-4 h-4" />
+                LinkedIn
+              </a>
+            </div>
+
+            {/* Availability badge */}
+            <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 flex items-center gap-3">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0 animate-pulse" />
               <div>
-                <strong className="block text-emerald-300 font-bold font-serif">Immediate Availability</strong>
+                <strong className="block font-bold">Immediately Available</strong>
                 Ready for 24/7 rotational shifts and incident support schedules.
               </div>
             </div>
-
           </div>
 
-          {/* Right Side: Message & Ticket Form */}
-          <div className="lg:col-span-7 bg-zinc-900/90 border border-zinc-800 rounded-2xl p-6 sm:p-8 shadow-2xl relative">
+          {/* Right Side: Contact Form */}
+          <div className="lg:col-span-7 bg-white border border-[#e0e0d8] rounded-2xl p-6 sm:p-8 shadow-sm">
             
             {isSent ? (
               <div className="text-center py-12 space-y-4">
-                <div className="w-16 h-16 rounded-full bg-zinc-950 border border-emerald-500/30 flex items-center justify-center mx-auto text-emerald-400">
+                <div className="w-16 h-16 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center mx-auto text-emerald-600">
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
-                <h3 className="text-xl font-serif font-bold text-zinc-100">Message Logged Successfully!</h3>
-                <p className="text-xs font-mono text-cyan-300 bg-zinc-950 p-2.5 rounded-xl border border-zinc-800 inline-block">
-                  TICKET REF: {ticketRef}
+                <h3 className="text-xl font-bold text-[#0a0a0a]">Message Sent!</h3>
+                <p className="text-xs font-mono text-[#737373] bg-[#f5f5f0] p-2.5 rounded-xl border border-[#e0e0d8] inline-block">
+                  REF: {ticketRef}
                 </p>
-                <p className="text-sm text-zinc-300 max-w-md mx-auto font-sans">
-                  Thank you, <strong>{name}</strong>! Your inquiry has been dispatched to Christian Matthew P. Dator ({personalInfo.email}).
+                <p className="text-sm text-[#525252] max-w-md mx-auto">
+                  Thank you, <strong>{name}</strong>! Your inquiry has been dispatched to Christian Matthew P. Dator.
                 </p>
                 <button
-                  onClick={() => {
-                    setIsSent(false);
-                    setName('');
-                    setEmail('');
-                    setMessage('');
-                  }}
-                  className="px-5 py-2 rounded-xl bg-zinc-800 text-xs font-semibold text-zinc-200 hover:bg-zinc-700 transition-colors"
+                  onClick={() => { setIsSent(false); setName(''); setEmail(''); setMessage(''); }}
+                  className="px-5 py-2 rounded-full bg-[#0a0a0a] text-sm font-semibold text-white hover:bg-[#262626] transition-colors"
                 >
-                  Send Another Message
+                  Send Another
                 </button>
               </div>
             ) : (
               <div>
-                <div className="flex items-center justify-between pb-4 border-b border-zinc-800 mb-6">
+                <div className="flex items-center justify-between pb-4 border-b border-[#e0e0d8] mb-6">
                   <div>
-                    <h3 className="text-lg font-serif font-bold text-zinc-100">Send Direct Inquiry / Schedule Interview</h3>
-                    <p className="text-xs text-zinc-400 mt-0.5 font-sans">Submit details to create a direct dispatch ticket for Christian</p>
+                    <h3 className="text-lg font-bold text-[#0a0a0a]">Send Direct Inquiry</h3>
+                    <p className="text-xs text-[#737373] mt-0.5">Schedule an interview or reach out directly</p>
                   </div>
-                  <Sparkles className="w-5 h-5 text-amber-400 shrink-0" />
+                  <Sparkles className="w-5 h-5 text-[#737373] shrink-0" />
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-4 text-xs sm:text-sm font-sans">
+                <form onSubmit={handleSubmit} className="space-y-4 text-sm">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block font-medium text-zinc-300 mb-1">Your Full Name *</label>
+                      <label className="block font-medium text-[#0a0a0a] mb-1 text-xs uppercase tracking-wide">Full Name *</label>
                       <input
                         type="text"
                         required
-                        placeholder="e.g. Hiring Manager / Tech Lead"
+                        placeholder="e.g. Hiring Manager"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-100 focus:outline-none focus:border-zinc-500"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#f5f5f0] border border-[#d0d0c8] text-[#0a0a0a] focus:outline-none focus:border-[#0a0a0a] transition-colors placeholder:text-[#a0a098]"
                       />
                     </div>
-
                     <div>
-                      <label className="block font-medium text-zinc-300 mb-1">Your Email Address *</label>
+                      <label className="block font-medium text-[#0a0a0a] mb-1 text-xs uppercase tracking-wide">Email Address *</label>
                       <input
                         type="email"
                         required
-                        placeholder="e.g. recruiter@company.com"
+                        placeholder="recruiter@company.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-100 focus:outline-none focus:border-zinc-500"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#f5f5f0] border border-[#d0d0c8] text-[#0a0a0a] focus:outline-none focus:border-[#0a0a0a] transition-colors placeholder:text-[#a0a098]"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block font-medium text-zinc-300 mb-1">Subject / Position Title</label>
+                    <label className="block font-medium text-[#0a0a0a] mb-1 text-xs uppercase tracking-wide">Subject / Position</label>
                     <input
                       type="text"
                       value={subject}
                       onChange={(e) => setSubject(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-100 focus:outline-none focus:border-zinc-500"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#f5f5f0] border border-[#d0d0c8] text-[#0a0a0a] focus:outline-none focus:border-[#0a0a0a] transition-colors"
                     />
                   </div>
 
                   <div>
-                    <label className="block font-medium text-zinc-300 mb-1">Message / Job Details *</label>
+                    <label className="block font-medium text-[#0a0a0a] mb-1 text-xs uppercase tracking-wide">Message *</label>
                     <textarea
                       required
                       rows={4}
                       placeholder="Enter job description, interview schedule, or technical inquiry..."
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-100 focus:outline-none focus:border-zinc-500 resize-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#f5f5f0] border border-[#d0d0c8] text-[#0a0a0a] focus:outline-none focus:border-[#0a0a0a] transition-colors resize-none placeholder:text-[#a0a098]"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full py-3 rounded-xl bg-zinc-100 hover:bg-zinc-200 font-bold text-zinc-950 text-sm shadow-lg transition-all flex items-center justify-center space-x-2 border border-zinc-300"
+                    className="w-full py-3 rounded-xl bg-[#0a0a0a] hover:bg-[#262626] font-bold text-white text-sm transition-all flex items-center justify-center gap-2"
                   >
                     <Send className="w-4 h-4" />
-                    <span>Send Inquiry to Christian</span>
+                    <span>Send Message</span>
                   </button>
                 </form>
               </div>
             )}
 
           </div>
-
         </div>
+      </div>
+
+      {/* Footer */}
+      <div className="mt-20 border-t border-[#e0e0d8] pt-8 text-center">
+        <p className="text-xs text-[#a0a098] font-mono">
+          © {new Date().getFullYear()} Christian Matthew P. Dator — IT Support Specialist & Junior IT Analyst
+        </p>
       </div>
     </section>
   );

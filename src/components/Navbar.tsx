@@ -6,7 +6,8 @@ import {
   Briefcase, 
   Code2, 
   Menu, 
-  X
+  X,
+  ArrowUpRight
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -39,59 +40,56 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-zinc-950/85 backdrop-blur-md border-b border-zinc-800/80 text-zinc-100">
+    <header className="sticky top-0 z-40 bg-[#f5f5f0]/90 backdrop-blur-md border-b border-[#e0e0d8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         
-        {/* Brand & Status */}
-        <div className="flex items-center cursor-pointer" onClick={() => handleNavClick('hero')}>
-          <div>
-            <div className="flex items-center space-x-2">
-              <span className="font-serif font-bold text-zinc-100 tracking-tight text-base sm:text-lg">
-                Christian Dator
-              </span>
-            </div>
-            <p className="text-xs text-zinc-400 hidden sm:block font-sans">
-              IT Support Specialist • Junior IT Analyst
-            </p>
+        {/* Available Badge + Brand */}
+        <div className="flex items-center gap-4 cursor-pointer" onClick={() => handleNavClick('hero')}>
+          {/* Availability dot badge */}
+          <div className="hidden sm:flex items-center gap-1.5 text-xs font-medium text-[#0a0a0a] border border-[#d0d0c8] rounded-full px-3 py-1 bg-white/60">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+            <span>Available for Hire</span>
           </div>
+          <span className="font-bold text-[#0a0a0a] tracking-tight text-sm sm:text-base">
+            Christian Dator
+          </span>
         </div>
 
-        {/* Desktop Nav Items */}
-        <nav className="hidden md:flex items-center space-x-1 lg:space-x-2">
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex items-center gap-1">
           {navItems.map((item) => {
-            const Icon = item.icon;
             const isActive = activeSection === item.id;
             return (
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                   isActive
-                    ? 'bg-zinc-800 text-cyan-300 border border-zinc-700/80 shadow-inner'
-                    : 'text-zinc-300 hover:text-white hover:bg-zinc-900/80'
+                    ? 'bg-[#0a0a0a] text-white'
+                    : 'text-[#525252] hover:text-[#0a0a0a] hover:bg-[#e5e5e0]'
                 }`}
               >
-                <Icon className="w-3.5 h-3.5 text-cyan-400" />
-                <span>{item.label}</span>
+                {item.label}
               </button>
             );
           })}
         </nav>
 
-
-        {/* Mobile menu button */}
-        <div className="flex md:hidden items-center space-x-2">
+        {/* CTA */}
+        <div className="flex items-center gap-2">
           <button
             onClick={onOpenResume}
-            className="flex items-center space-x-1 px-2.5 py-1 rounded-md text-xs font-semibold bg-zinc-100 text-zinc-950"
+            className="hidden sm:flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold bg-[#0a0a0a] text-white hover:bg-[#262626] transition-all"
           >
-            <FileText className="w-3 h-3" />
-            <span>CV</span>
+            <FileText className="w-3.5 h-3.5" />
+            <span>Resume</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
           </button>
 
+          {/* Mobile hamburger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-lg bg-zinc-900 text-zinc-300 hover:text-white border border-zinc-800"
+            className="md:hidden p-2 rounded-full text-[#0a0a0a] hover:bg-[#e5e5e0] transition-all"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -101,12 +99,10 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Navigation Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-zinc-950 border-b border-zinc-800 px-4 pt-2 pb-4 space-y-2">
-          <div className="py-1 border-b border-zinc-800 mb-2">
-            <div className="text-xs text-zinc-400 flex items-center justify-between">
-              <span>Status: <strong className="text-emerald-400">Available for Hire</strong></span>
-              <span className="text-zinc-400">Quezon City</span>
-            </div>
+        <div className="md:hidden bg-[#f5f5f0] border-b border-[#e0e0d8] px-4 pt-2 pb-4 space-y-1">
+          <div className="flex items-center gap-1.5 text-xs font-medium text-[#0a0a0a] mb-3">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span>Available for Hire — Quezon City</span>
           </div>
           {navItems.map((item) => {
             const Icon = item.icon;
@@ -114,26 +110,20 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-zinc-200 hover:bg-zinc-900"
+                className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-[#0a0a0a] hover:bg-[#e5e5e0] transition-all text-left"
               >
-                <Icon className="w-4 h-4 text-cyan-400" />
+                <Icon className="w-4 h-4 text-[#525252]" />
                 <span>{item.label}</span>
               </button>
             );
           })}
-          
-          <div className="pt-2">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenResume();
-              }}
-              className="w-full flex items-center justify-center space-x-1.5 px-3 py-2 rounded-lg text-xs font-semibold bg-zinc-100 text-zinc-950"
-            >
-              <FileText className="w-3.5 h-3.5" />
-              <span>View Resume</span>
-            </button>
-          </div>
+          <button
+            onClick={() => { setMobileMenuOpen(false); onOpenResume(); }}
+            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold bg-[#0a0a0a] text-white mt-2"
+          >
+            <FileText className="w-4 h-4" />
+            <span>View Resume</span>
+          </button>
         </div>
       )}
     </header>
