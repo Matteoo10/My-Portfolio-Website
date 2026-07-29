@@ -70,10 +70,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
               </div>
             </div>
 
-            <div className="flex items-center gap-1.5 text-xs text-[#525252]">
-              <MapPin className="w-3.5 h-3.5" />
-              <span>{personalInfo.location}</span>
-            </div>
           </div>
 
           {/* Center: Portrait (6 cols) — absolutely fills behind name */}
