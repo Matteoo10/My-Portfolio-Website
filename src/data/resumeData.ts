@@ -6,7 +6,7 @@ export const personalInfo = {
   phone: "0954-455-2990",
   email: "datorchristian10@gmail.com",
   location: "Quezon City, Philippines",
-  profileImage: "/profile.png",
+  profileImage: `${import.meta.env.BASE_URL}profile.png`,
   summary: "Information Technology graduate with hands-on experience in technical support, network configuration, ticketing management, incident management, and IT operations. Skilled in troubleshooting hardware, software, printer, network, and user access issues, with experience supporting Ubiquiti network devices, VLANs, firewall rules, bandwidth management, and 24/7 support requirements. Reliable and detail-oriented, with a strong willingness to learn and contribute to stable and secure IT operations.",
   github: "https://github.com/datorchristian10",
   linkedin: "https://linkedin.com/in/christian-dator",
