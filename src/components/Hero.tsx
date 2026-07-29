@@ -93,7 +93,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
           </div>
 
           {/* Right: Social Links (3 cols) */}
-          <div className="col-span-12 lg:col-span-3 flex flex-row lg:flex-col justify-center lg:justify-start gap-3 lg:pt-4">
+          <div className="col-span-12 lg:col-span-3 flex flex-row lg:flex-col justify-center lg:justify-start gap-3 lg:self-start lg:pt-8">
             {socialLinks.map(({ label, href, Icon }) => (
               <a
                 key={label}
