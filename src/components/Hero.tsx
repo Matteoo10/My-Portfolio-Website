@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { personalInfo } from '../data/resumeData';
-import { Github, Linkedin, Mail, Phone, ArrowUpRight, MapPin } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowUpRight, MapPin } from 'lucide-react';
 
 interface HeroProps {
   onOpenResume: () => void;
@@ -18,7 +18,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
     { label: 'GitHub', href: personalInfo.github, Icon: Github },
     { label: 'LinkedIn', href: personalInfo.linkedin, Icon: Linkedin },
     { label: 'Email', href: `mailto:${personalInfo.email}`, Icon: Mail },
-    { label: 'Phone', href: `tel:${personalInfo.phone}`, Icon: Phone },
   ];
 
   return (
@@ -77,18 +76,18 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
             </div>
           </div>
 
-          {/* Center: Portrait (6 cols) */}
-          <div className="col-span-12 lg:col-span-6 flex justify-center items-end relative">
+          {/* Center: Portrait (6 cols) — absolutely fills behind name */}
+          <div className="col-span-12 lg:col-span-6 relative" style={{ minHeight: 'calc(100vh - 64px)' }}>
             <div
-              className="relative w-full max-w-xs sm:max-w-sm lg:max-w-md"
-              style={{ maskImage: 'linear-gradient(to bottom, black 55%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 55%, transparent 100%)' }}
+              className="absolute inset-x-0 bottom-0 flex justify-center items-end"
+              style={{ maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)' }}
             >
               <img
                 src={userPhoto}
                 alt="Christian Matthew P. Dator"
                 referrerPolicy="no-referrer"
                 className="w-full h-auto object-cover object-top filter grayscale contrast-105 brightness-105 transition-all duration-700 hover:grayscale-0"
-                style={{ maxHeight: '70vh' }}
+                style={{ maxHeight: '92vh', maxWidth: '520px' }}
               />
             </div>
           </div>
