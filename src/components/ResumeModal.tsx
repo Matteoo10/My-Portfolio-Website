@@ -5,7 +5,8 @@ import {
   Printer, 
   Copy, 
   Check, 
-  FileText 
+  FileText,
+  Download
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -19,19 +20,10 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
 
   if (!isOpen) return null;
 
-  const handlePrint = () => {
-    confetti({
-      particleCount: 40,
-      spread: 50,
-      origin: { y: 0.6 }
-    });
-    window.print();
-  };
-
   const websiteUrl = "https://matteoo10.github.io/My-Portfolio-Website/";
 
-  const handleCopyText = () => {
-    const textResume = `
+  const generateTextResume = () => {
+    return `
 CHRISTIAN MATTHEW P. DATOR
 ${personalInfo.title}
 ${personalInfo.phone} | ${personalInfo.email} | ${personalInfo.location}
@@ -74,22 +66,57 @@ ID Management System | Five Star Bus Company
 School Cafeteria Web Portal | Capstone
 • Academic Capstone Project built for Universidad de Manila to streamline food ordering, inventory monitoring, and cafeteria operations.
     `.trim();
+  };
 
+  const handlePrint = () => {
+    try {
+      confetti({
+        particleCount: 40,
+        spread: 50,
+        origin: { y: 0.6 }
+      });
+    } catch (e) {
+      console.warn("Confetti skipped:", e);
+    }
+    
+    setTimeout(() => {
+      window.print();
+    }, 150);
+  };
+
+  const handleCopyText = () => {
+    const textResume = generateTextResume();
     navigator.clipboard.writeText(textResume);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const handleDownloadText = () => {
+    const textResume = generateTextResume();
+    const blob = new Blob([textResume], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'Christian_Matthew_Dator_Resume.txt';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
   return (
-    <div className="fixed inset-0 z-50 bg-zinc-950/90 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 overflow-y-auto print:static print:bg-white print:p-0 print:block">
-      <div className="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl relative print:bg-white print:border-none print:shadow-none print:max-h-none print:static print:w-full print:p-0">
+    <div className="fixed inset-0 z-50 bg-zinc-950/90 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 overflow-y-auto print:static print:bg-white print:p-0 print:block print:overflow-visible">
+      <div className="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl relative print:bg-white print:border-none print:shadow-none print:max-h-none print:static print:w-full print:p-0 print:overflow-visible">
         
         {/* Top Controls Header */}
         <div className="p-4 bg-zinc-950 border-b border-zinc-800 flex items-center justify-between shrink-0 font-sans print:hidden">
           <div className="flex items-center space-x-2">
             <FileText className="w-5 h-5 text-cyan-400" />
-            <h3 className="font-serif font-bold text-base text-zinc-100">
+            <h3 className="font-serif font-bold text-base text-zinc-100 hidden sm:block">
               Resume Preview - Christian Matthew P. Dator
+            </h3>
+            <h3 className="font-serif font-bold text-sm text-zinc-100 sm:hidden">
+              Resume Preview
             </h3>
           </div>
 
@@ -97,9 +124,19 @@ School Cafeteria Web Portal | Capstone
             <button
               onClick={handleCopyText}
               className="px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs text-zinc-200 font-medium flex items-center space-x-1.5 border border-zinc-700 transition-colors"
+              title="Copy text version"
             >
               {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-zinc-400" />}
-              <span>{copied ? 'Copied Text' : 'Copy Text'}</span>
+              <span className="hidden md:inline">{copied ? 'Copied' : 'Copy Text'}</span>
+            </button>
+
+            <button
+              onClick={handleDownloadText}
+              className="px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs text-zinc-200 font-medium flex items-center space-x-1.5 border border-zinc-700 transition-colors"
+              title="Download text file"
+            >
+              <Download className="w-3.5 h-3.5 text-cyan-400" />
+              <span className="hidden md:inline">Download .TXT</span>
             </button>
 
             <button
@@ -107,7 +144,7 @@ School Cafeteria Web Portal | Capstone
               className="px-3.5 py-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-950 font-bold text-xs flex items-center space-x-1.5 shadow transition-colors"
             >
               <Printer className="w-3.5 h-3.5" />
-              <span>Print / Download PDF</span>
+              <span>Print / Save PDF</span>
             </button>
 
             <button
@@ -120,7 +157,7 @@ School Cafeteria Web Portal | Capstone
         </div>
 
         {/* Resume Content Paper View */}
-        <div className="p-6 sm:p-10 overflow-y-auto space-y-6 text-slate-800 bg-white font-sans text-xs sm:text-sm custom-scrollbar print:p-0 print:m-0 print:bg-white print:text-black">
+        <div className="p-6 sm:p-10 overflow-y-auto space-y-6 text-slate-800 bg-white font-sans text-xs sm:text-sm custom-scrollbar print:p-0 print:m-0 print:bg-white print:text-black print:overflow-visible print:max-h-none print:h-auto">
           
           {/* Header */}
           <div className="text-center border-b-2 border-slate-800 pb-4">
