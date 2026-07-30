@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { ExperienceTimeline } from './components/ExperienceTimeline';
-import { SkillsMatrix } from './components/SkillsMatrix';
 import { ProjectsShowcase } from './components/ProjectsShowcase';
 import { ContactSection } from './components/ContactSection';
 import { ResumeModal } from './components/ResumeModal';
@@ -14,7 +13,7 @@ export default function App() {
   // Track active section on scroll
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['hero', 'experience', 'skills', 'projects', 'contact'];
+      const sections = ['hero', 'experience', 'projects', 'contact'];
       const scrollPos = window.scrollY + 200;
 
       for (const sectionId of sections) {
@@ -60,11 +59,6 @@ export default function App() {
 
         {/* Work Experience & Education Timeline */}
         <ExperienceTimeline />
-
-        {/* Technical Skills & Interactive CLI */}
-        <SkillsMatrix
-          onOpenResume={() => setIsResumeModalOpen(true)}
-        />
 
         {/* Projects Showcase & Wireframe Demos */}
         <ProjectsShowcase />
