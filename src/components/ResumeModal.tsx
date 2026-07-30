@@ -243,7 +243,7 @@ School Cafeteria Web Portal | Capstone
           </div>
 
           {/* PAGE 2 CONTENT */}
-          <div className="space-y-4 print-page-break-before">
+          <div className="space-y-4 print-page-break-before pt-3 sm:pt-4 print:pt-6">
             {/* Technical Skills */}
             <div>
               <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b border-slate-300 pb-1 mb-2">

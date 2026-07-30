@@ -140,6 +140,7 @@
   .print-page-break-before {
     break-before: page !important;
     page-break-before: always !important;
+    padding-top: 10mm !important;
   }
   .print-avoid-break {
     break-inside: avoid !important;
