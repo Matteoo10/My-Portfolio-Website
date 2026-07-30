@@ -144,24 +144,24 @@ School Cafeteria Web Portal | Capstone
         </div>
 
         {/* Resume Content Paper View */}
-        <div className="p-6 sm:p-10 overflow-y-auto space-y-6 text-slate-800 bg-white font-sans text-xs sm:text-sm custom-scrollbar print-paper-content print:p-0 print:m-0 print:bg-white print:text-black print:overflow-visible print:max-h-none print:h-auto">
+        <div className="p-6 sm:p-10 overflow-y-auto space-y-4 sm:space-y-5 print:space-y-3 text-slate-800 bg-white font-sans text-xs sm:text-sm custom-scrollbar print-paper-content print:p-0 print:m-0 print:bg-white print:text-black print:overflow-visible print:max-h-none print:h-auto">
           
           {/* Header */}
-          <div className="text-center border-b-2 border-slate-800 pb-4">
+          <div className="text-center border-b-2 border-slate-800 pb-3 print:pb-2 print-avoid-break">
             <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-wide uppercase">
               CHRISTIAN MATTHEW P. DATOR
             </h1>
-            <h2 className="text-sm sm:text-base font-bold text-slate-700 mt-1">
+            <h2 className="text-sm sm:text-base font-bold text-slate-700 mt-0.5">
               IT Support Specialist | Junior IT Analyst
             </h2>
-            <div className="mt-2 flex flex-wrap justify-center items-center gap-3 text-xs text-slate-600">
+            <div className="mt-1.5 flex flex-wrap justify-center items-center gap-3 text-xs text-slate-600">
               <span>{personalInfo.phone}</span>
               <span>|</span>
               <span>{personalInfo.email}</span>
               <span>|</span>
               <span>Quezon City</span>
             </div>
-            <div className="mt-1 text-xs text-slate-600">
+            <div className="mt-0.5 text-xs text-slate-600">
               <a href={websiteUrl} target="_blank" rel="noopener noreferrer" className="hover:underline text-slate-800 font-medium">
                 {websiteUrl}
               </a>
@@ -169,8 +169,8 @@ School Cafeteria Web Portal | Capstone
           </div>
 
           {/* Professional Summary */}
-          <div>
-            <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b border-slate-300 pb-1 mb-2">
+          <div className="print-avoid-break">
+            <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b border-slate-300 pb-1 mb-1.5">
               PROFESSIONAL SUMMARY
             </h3>
             <p className="text-slate-700 leading-relaxed text-justify">
@@ -179,20 +179,20 @@ School Cafeteria Web Portal | Capstone
           </div>
 
           {/* Work Experience */}
-          <div>
-            <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b border-slate-300 pb-1 mb-3">
+          <div className="print-avoid-break">
+            <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b border-slate-300 pb-1 mb-2">
               WORK EXPERIENCE
             </h3>
 
-            <div className="space-y-4">
+            <div className="space-y-3 print:space-y-2">
               {/* National Children's Hospital */}
               <div>
                 <div className="flex justify-between items-baseline font-bold text-slate-900">
                   <span className="text-sm">National Children's Hospital</span>
                   <span className="text-xs text-slate-600">February 2025 - May 2025</span>
                 </div>
-                <div className="italic font-semibold text-slate-700 mb-1.5">IT Internship</div>
-                <ul className="list-disc list-inside space-y-1 text-slate-700 pl-1">
+                <div className="italic font-semibold text-slate-700 mb-1">IT Internship</div>
+                <ul className="list-disc list-inside space-y-0.5 text-slate-700 pl-1">
                   <li>Assisted in basic networking tasks including cable management and device setup.</li>
                   <li>Supported IT staff with hardware troubleshooting and daily technical tasks.</li>
                 </ul>
@@ -204,8 +204,8 @@ School Cafeteria Web Portal | Capstone
                   <span className="text-sm">Five Star Bus Company</span>
                   <span className="text-xs text-slate-600">July 2025 - Present</span>
                 </div>
-                <div className="italic font-semibold text-slate-700 mb-1.5">Junior I.T Analyst</div>
-                <ul className="list-disc list-inside space-y-1 text-slate-700 pl-1">
+                <div className="italic font-semibold text-slate-700 mb-1">Junior I.T Analyst</div>
+                <ul className="list-disc list-inside space-y-0.5 text-slate-700 pl-1">
                   {workExperience[0].description.map((bullet, i) => (
                     <li key={i}>{bullet}</li>
                   ))}
@@ -215,8 +215,8 @@ School Cafeteria Web Portal | Capstone
           </div>
 
           {/* Education */}
-          <div>
-            <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b border-slate-300 pb-1 mb-2">
+          <div className="print-avoid-break">
+            <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b border-slate-300 pb-1 mb-1.5">
               EDUCATION
             </h3>
             <div className="flex justify-between items-baseline font-bold text-slate-900">
@@ -224,7 +224,7 @@ School Cafeteria Web Portal | Capstone
               <span className="text-xs text-slate-600" style={{ whiteSpace: 'nowrap', flexShrink: 0 }}>2021 - 2025</span>
             </div>
             <div className="font-semibold text-slate-800">Bachelor of Science in Information Technology</div>
-            <div className="text-slate-600 text-xs mt-1">
+            <div className="text-slate-600 text-xs mt-0.5">
               Relevant Subjects: Web Development, Computer Networks, Database Management
             </div>
             <div className="text-slate-700 text-xs font-medium mt-0.5">
@@ -233,11 +233,11 @@ School Cafeteria Web Portal | Capstone
           </div>
 
           {/* Technical Skills */}
-          <div>
-            <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b border-slate-300 pb-1 mb-2">
+          <div className="print-avoid-break">
+            <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b border-slate-300 pb-1 mb-1.5">
               TECHNICAL SKILLS
             </h3>
-            <ul className="space-y-1.5 text-slate-800 text-xs sm:text-sm">
+            <ul className="space-y-1 text-slate-800 text-xs sm:text-sm">
               <li className="flex items-start gap-2">
                 <span className="font-bold text-slate-900 shrink-0">•</span>
                 <div>
@@ -272,7 +272,7 @@ School Cafeteria Web Portal | Capstone
           </div>
 
           {/* Projects */}
-          <div>
+          <div className="print-page-break-before print-avoid-break">
             <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b border-slate-300 pb-1 mb-2">
               PROJECTS
             </h3>

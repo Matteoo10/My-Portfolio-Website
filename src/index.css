@@ -135,7 +135,15 @@
     display: none !important;
   }
   .print-paper-content {
-    padding: 15mm 18mm !important;
+    padding: 12mm 15mm !important;
+  }
+  .print-page-break-before {
+    break-before: page !important;
+    page-break-before: always !important;
+  }
+  .print-avoid-break {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
 }
 
