@@ -237,23 +237,38 @@ School Cafeteria Web Portal | Capstone
             <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b border-slate-300 pb-1 mb-2">
               TECHNICAL SKILLS
             </h3>
-            <div className="space-y-1.5 text-slate-800">
-              <div>
-                <strong className="text-slate-900">Networking:</strong> TCP/IP, DNS, DHCP, LAN, VLANs, firewall rules, router and switch configuration
-              </div>
-              <div>
-                <strong className="text-slate-900">Tools:</strong> Microsoft Office, GitHub, VirtualBox, AnyDesk, Remote Desktop, Visual Studio Code, XAMPP, Command Prompt, PowerShell
-              </div>
-              <div>
-                <strong className="text-slate-900">Support:</strong> Hardware and software troubleshooting, account setup, printer troubleshooting, remote support, ticket documentation, incident escalation, and preventive maintenance
-              </div>
-              <div>
-                <strong className="text-slate-900">Progamming Language:</strong> C++, Laravel Blade, PHP
-              </div>
-              <div>
-                <strong className="text-slate-900">Database:</strong> MySQL, MongoDB
-              </div>
-            </div>
+            <ul className="space-y-1.5 text-slate-800 text-xs sm:text-sm">
+              <li className="flex items-start gap-2">
+                <span className="font-bold text-slate-900 shrink-0">•</span>
+                <div>
+                  <strong className="text-slate-900">Networking:</strong> TCP/IP, DNS, DHCP, LAN, VLANs, firewall rules, router and switch configuration
+                </div>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="font-bold text-slate-900 shrink-0">•</span>
+                <div>
+                  <strong className="text-slate-900">Tools:</strong> Microsoft Office, GitHub, VirtualBox, AnyDesk, Remote Desktop, Visual Studio Code, XAMPP, Command Prompt, PowerShell
+                </div>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="font-bold text-slate-900 shrink-0">•</span>
+                <div>
+                  <strong className="text-slate-900">Support:</strong> Hardware and software troubleshooting, account setup, printer troubleshooting, remote support, ticket documentation, incident escalation, and preventive maintenance
+                </div>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="font-bold text-slate-900 shrink-0">•</span>
+                <div>
+                  <strong className="text-slate-900">Programming Language:</strong> C++, Laravel Blade, PHP
+                </div>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="font-bold text-slate-900 shrink-0">•</span>
+                <div>
+                  <strong className="text-slate-900">Database:</strong> MySQL, MongoDB
+                </div>
+              </li>
+            </ul>
           </div>
 
           {/* Projects */}
