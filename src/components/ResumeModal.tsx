@@ -1,16 +1,11 @@
 import React, { useState } from 'react';
-import { personalInfo, workExperience, education, initialTickets } from '../data/resumeData';
+import { personalInfo, workExperience } from '../data/resumeData';
 import { 
   X, 
   Printer, 
   Copy, 
   Check, 
-  Download, 
-  Mail, 
-  Phone, 
-  MapPin, 
-  FileText, 
-  CheckCircle2 
+  FileText 
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -33,34 +28,51 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
     window.print();
   };
 
+  const websiteUrl = "https://matteoo10.github.io/My-Portfolio-Website/";
+
   const handleCopyText = () => {
     const textResume = `
 CHRISTIAN MATTHEW P. DATOR
 ${personalInfo.title}
-Phone: ${personalInfo.phone} | Email: ${personalInfo.email} | Location: ${personalInfo.location}
+${personalInfo.phone} | ${personalInfo.email} | ${personalInfo.location}
+${websiteUrl}
 
 PROFESSIONAL SUMMARY
 ${personalInfo.summary}
 
 WORK EXPERIENCE
 
-Junior I.T Analyst | Five Star Bus Company (July 2025 - Present)
+National Children's Hospital | February 2025 - May 2025
+IT Internship
+- Assisted in basic networking tasks including cable management and device setup.
+- Supported IT staff with hardware troubleshooting and daily technical tasks.
+
+Five Star Bus Company | July 2025 - Present
+Junior I.T Analyst
 ${workExperience[0].description.map(d => `- ${d}`).join('\n')}
 
-IT Internship | National Children's Hospital (February 2025 - May 2025)
-${workExperience[1].description.map(d => `- ${d}`).join('\n')}
-
 EDUCATION
-Bachelor of Science in Information Technology | Universidad de Manila (2021 - 2025)
+Universidad de Manila | 2021 - 2025
+Bachelor of Science in Information Technology
 Relevant Subjects: Web Development, Computer Networks, Database Management
-Capstone Project: School Cafeteria Website using PHP and MongoDB
+Capstone / Project: School Cafeteria Website using PHP and MongoDB
 
 TECHNICAL SKILLS
 - Networking: TCP/IP, DNS, DHCP, LAN, VLANs, firewall rules, router and switch configuration
 - Tools: Microsoft Office, GitHub, VirtualBox, AnyDesk, Remote Desktop, Visual Studio Code, XAMPP, Command Prompt, PowerShell
 - Support: Hardware and software troubleshooting, account setup, printer troubleshooting, remote support, ticket documentation, incident escalation, and preventive maintenance
-- Programming Languages: C++, Laravel Blade, PHP
-- Databases: MySQL, MongoDB
+- Progamming Language: C++, Laravel Blade, PHP
+- Database: MySQL, MongoDB
+
+PROJECTS
+IT Ticketing System | Five Star Bus Company
+• Developing a system for logging, categorizing, prioritizing, tracking, and documenting IT support requests and resolutions
+
+ID Management System | Five Star Bus Company
+• A web-based ID issuance and tracking platform that allows users to submit ID requests, monitor real-time processing status.
+
+School Cafeteria Web Portal | Capstone
+• Academic Capstone Project built for Universidad de Manila to streamline food ordering, inventory monitoring, and cafeteria operations.
     `.trim();
 
     navigator.clipboard.writeText(textResume);
@@ -112,22 +124,27 @@ TECHNICAL SKILLS
           
           {/* Header */}
           <div className="text-center border-b-2 border-slate-800 pb-4">
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-wide">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-wide uppercase">
               CHRISTIAN MATTHEW P. DATOR
             </h1>
             <h2 className="text-sm sm:text-base font-bold text-slate-700 mt-1">
               IT Support Specialist | Junior IT Analyst
             </h2>
             <div className="mt-2 flex flex-wrap justify-center items-center gap-3 text-xs text-slate-600">
-              <span>Phone: {personalInfo.phone}</span>
-              <span>•</span>
-              <span>Email: {personalInfo.email}</span>
-              <span>•</span>
-              <span>Location: {personalInfo.location}</span>
+              <span>{personalInfo.phone}</span>
+              <span>|</span>
+              <span>{personalInfo.email}</span>
+              <span>|</span>
+              <span>Quezon City</span>
+            </div>
+            <div className="mt-1 text-xs text-slate-600">
+              <a href={websiteUrl} target="_blank" rel="noopener noreferrer" className="hover:underline text-slate-800 font-medium">
+                {websiteUrl}
+              </a>
             </div>
           </div>
 
-          {/* Summary */}
+          {/* Professional Summary */}
           <div>
             <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b border-slate-300 pb-1 mb-2">
               PROFESSIONAL SUMMARY
@@ -137,30 +154,6 @@ TECHNICAL SKILLS
             </p>
           </div>
 
-          {/* Technical Skills */}
-          <div>
-            <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b border-slate-300 pb-1 mb-2">
-              TECHNICAL SKILLS
-            </h3>
-            <div className="space-y-1.5 text-slate-800">
-              <div>
-                <strong className="text-slate-900">Networking:</strong> TCP/IP, DNS, DHCP, LAN, VLANs, firewall rules, router and switch configuration
-              </div>
-              <div>
-                <strong className="text-slate-900">Tools:</strong> Microsoft Office, GitHub, VirtualBox, AnyDesk, Remote Desktop, Visual Studio Code, XAMPP, Command Prompt, PowerShell
-              </div>
-              <div>
-                <strong className="text-slate-900">Support:</strong> Hardware and software troubleshooting, account setup, printer troubleshooting, remote support, ticket documentation, incident escalation, and preventive maintenance
-              </div>
-              <div>
-                <strong className="text-slate-900">Programming Language:</strong> C++, Laravel Blade, PHP
-              </div>
-              <div>
-                <strong className="text-slate-900">Database:</strong> MySQL, MongoDB
-              </div>
-            </div>
-          </div>
-
           {/* Work Experience */}
           <div>
             <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b border-slate-300 pb-1 mb-3">
@@ -168,29 +161,28 @@ TECHNICAL SKILLS
             </h3>
 
             <div className="space-y-4">
-              {/* Five Star Bus Co */}
-              <div>
-                <div className="flex justify-between items-baseline font-bold text-slate-900">
-                  <span className="text-sm">Five Star Bus Company</span>
-                  <span className="text-xs text-slate-600">July 2025 - Present</span>
-                </div>
-                <div className="italic font-semibold text-slate-700 mb-2">Junior I.T Analyst</div>
-                <ul className="list-disc list-inside space-y-1 text-slate-700 pl-1">
-                  {workExperience[0].description.map((bullet, i) => (
-                    <li key={i}>{bullet}</li>
-                  ))}
-                </ul>
-              </div>
-
               {/* National Children's Hospital */}
               <div>
                 <div className="flex justify-between items-baseline font-bold text-slate-900">
                   <span className="text-sm">National Children's Hospital</span>
                   <span className="text-xs text-slate-600">February 2025 - May 2025</span>
                 </div>
-                <div className="italic font-semibold text-slate-700 mb-2">IT Internship</div>
+                <div className="italic font-semibold text-slate-700 mb-1.5">IT Internship</div>
                 <ul className="list-disc list-inside space-y-1 text-slate-700 pl-1">
-                  {workExperience[1].description.map((bullet, i) => (
+                  <li>Assisted in basic networking tasks including cable management and device setup.</li>
+                  <li>Supported IT staff with hardware troubleshooting and daily technical tasks.</li>
+                </ul>
+              </div>
+
+              {/* Five Star Bus Co */}
+              <div>
+                <div className="flex justify-between items-baseline font-bold text-slate-900">
+                  <span className="text-sm">Five Star Bus Company</span>
+                  <span className="text-xs text-slate-600">July 2025 - Present</span>
+                </div>
+                <div className="italic font-semibold text-slate-700 mb-1.5">Junior I.T Analyst</div>
+                <ul className="list-disc list-inside space-y-1 text-slate-700 pl-1">
+                  {workExperience[0].description.map((bullet, i) => (
                     <li key={i}>{bullet}</li>
                   ))}
                 </ul>
@@ -216,17 +208,63 @@ TECHNICAL SKILLS
             </div>
           </div>
 
+          {/* Technical Skills */}
+          <div>
+            <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b border-slate-300 pb-1 mb-2">
+              TECHNICAL SKILLS
+            </h3>
+            <div className="space-y-1.5 text-slate-800">
+              <div>
+                <strong className="text-slate-900">Networking:</strong> TCP/IP, DNS, DHCP, LAN, VLANs, firewall rules, router and switch configuration
+              </div>
+              <div>
+                <strong className="text-slate-900">Tools:</strong> Microsoft Office, GitHub, VirtualBox, AnyDesk, Remote Desktop, Visual Studio Code, XAMPP, Command Prompt, PowerShell
+              </div>
+              <div>
+                <strong className="text-slate-900">Support:</strong> Hardware and software troubleshooting, account setup, printer troubleshooting, remote support, ticket documentation, incident escalation, and preventive maintenance
+              </div>
+              <div>
+                <strong className="text-slate-900">Progamming Language:</strong> C++, Laravel Blade, PHP
+              </div>
+              <div>
+                <strong className="text-slate-900">Database:</strong> MySQL, MongoDB
+              </div>
+            </div>
+          </div>
+
           {/* Projects */}
           <div>
             <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b border-slate-300 pb-1 mb-2">
               PROJECTS
             </h3>
-            <div className="font-bold text-slate-900">
-              IT Ticketing System <span className="font-normal italic text-slate-600">| In Progress</span>
+            <div className="space-y-3">
+              <div>
+                <div className="font-bold text-slate-900 text-sm">
+                  IT Ticketing System | Five Star Bus Company
+                </div>
+                <p className="text-slate-700 text-xs mt-0.5">
+                  • Developing a system for logging, categorizing, prioritizing, tracking, and documenting IT support requests and resolutions
+                </p>
+              </div>
+
+              <div>
+                <div className="font-bold text-slate-900 text-sm">
+                  ID Management System | Five Star Bus Company
+                </div>
+                <p className="text-slate-700 text-xs mt-0.5">
+                  A web-based ID issuance and tracking platform that allows users to submit ID requests, monitor real-time processing status.
+                </p>
+              </div>
+
+              <div>
+                <div className="font-bold text-slate-900 text-sm">
+                  School Cafeteria Web Portal | Capstone
+                </div>
+                <p className="text-slate-700 text-xs mt-0.5">
+                  • Academic Capstone Project built for Universidad de Manila to streamline food ordering, inventory monitoring, and cafeteria operations.
+                </p>
+              </div>
             </div>
-            <p className="text-slate-700 text-xs mt-1">
-              • Developing a system for logging, categorizing, prioritizing, tracking, and documenting IT support requests and resolutions
-            </p>
           </div>
 
         </div>
