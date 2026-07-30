@@ -55,3 +55,64 @@
   transform: translateY(-2px);
   box-shadow: 0 12px 40px -8px rgba(0,0,0,0.12);
 }
+
+/* ─── Parallax Layer ────────────────────────────────────────────────────── */
+.parallax-bg {
+  will-change: transform;
+}
+
+/* ─── Scroll Reveal: scale-in + rotate-in ──────────────────────────────── */
+.reveal-block {
+  opacity: 0;
+  transform: scale(0.95) rotate(-1deg);
+  transition:
+    opacity 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
+    transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.reveal-block.is-visible {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+/* ─── Magnetic Card / Button ────────────────────────────────────────────── */
+.magnetic-card,
+.magnetic-btn {
+  will-change: transform;
+  /* individual transition handled inline via hook style */
+}
+
+/* ─── Glow Hover (instant on mouse-over) ───────────────────────────────── */
+.glow-hover {
+  border-color: #d0d0c8;
+  box-shadow: none;
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.glow-hover:hover {
+  border-color: #0a0a0a;
+  box-shadow:
+    0 0 0 3px rgba(10, 10, 10, 0.06),
+    0 8px 28px -6px rgba(10, 10, 10, 0.14);
+}
+
+/* ─── Accessibility: reduced motion ────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-block {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .parallax-bg {
+    transform: none !important;
+  }
+
+  .magnetic-card,
+  .magnetic-btn {
+    transform: none !important;
+    transition: none !important;
+  }
+}

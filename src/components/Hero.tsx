@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { personalInfo } from '../data/resumeData';
 import { Github, Linkedin, Mail, ArrowUpRight, MapPin } from 'lucide-react';
+import { useParallax } from '../hooks/useParallax';
+import { useMagneticHover } from '../hooks/useMagneticHover';
 
 interface HeroProps {
   onOpenResume: () => void;
@@ -9,24 +11,37 @@ interface HeroProps {
 export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
   const [userPhoto] = useState<string>(personalInfo.profileImage);
 
+  // Parallax: display name drifts slowest (background layer)
+  const { style: bgNameStyle } = useParallax(0.4);
+  // Parallax: portrait drifts slightly faster than name but slower than text
+  const { style: portraitStyle } = useParallax(0.18);
+
+  // Magnetic for primary CTA button
+  const { ref: ctaRef, style: ctaStyle } = useMagneticHover(0.3);
+  // Magnetic for each social link
+  const { ref: ghRef, style: ghStyle } = useMagneticHover(0.25);
+  const { ref: liRef, style: liStyle } = useMagneticHover(0.25);
+  const { ref: mailRef, style: mailStyle } = useMagneticHover(0.25);
+
+  const socialLinks = [
+    { label: 'GitHub', href: personalInfo.github, Icon: Github, ref: ghRef, style: ghStyle },
+    { label: 'LinkedIn', href: personalInfo.linkedin, Icon: Linkedin, ref: liRef, style: liStyle },
+    { label: 'Email', href: `mailto:${personalInfo.email}`, Icon: Mail, ref: mailRef, style: mailStyle },
+  ];
+
   const scrollToContact = () => {
     const el = document.getElementById('contact');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const socialLinks = [
-    { label: 'GitHub', href: personalInfo.github, Icon: Github },
-    { label: 'LinkedIn', href: personalInfo.linkedin, Icon: Linkedin },
-    { label: 'Email', href: `mailto:${personalInfo.email}`, Icon: Mail },
-  ];
-
   return (
     <section id="hero" className="relative bg-[#f5f5f0] overflow-hidden" style={{ minHeight: 'calc(100vh - 64px)' }}>
 
-      {/* ── Large Display Name Behind Everything ── */}
+      {/* ── Large Display Name Behind Everything (parallax background layer) ── */}
       <div
-        className="absolute inset-x-0 top-0 flex items-start justify-center pointer-events-none select-none overflow-hidden"
+        className="absolute inset-x-0 top-0 flex items-start justify-center pointer-events-none select-none overflow-hidden parallax-bg"
         aria-hidden="true"
+        style={bgNameStyle}
       >
         <span
           className="font-display leading-none tracking-tight whitespace-nowrap"
@@ -54,22 +69,26 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
 
             <div className="space-y-3">
               <button
+                ref={ctaRef as React.RefObject<HTMLButtonElement>}
                 onClick={scrollToContact}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold bg-[#0a0a0a] text-white hover:bg-[#262626] transition-all group"
+                style={ctaStyle}
+                className="magnetic-btn glow-hover inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold bg-[#0a0a0a] text-white hover:bg-[#262626] transition-colors group border border-transparent"
               >
                 <span>Let's collaborate</span>
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </button>
-
             </div>
-
           </div>
 
-          {/* Center: Portrait (6 cols) — absolutely fills behind name */}
+          {/* Center: Portrait (6 cols) — parallax at intermediate speed */}
           <div className="col-span-12 lg:col-span-6 relative" style={{ minHeight: 'calc(100vh - 64px)' }}>
             <div
-              className="absolute inset-x-0 bottom-0 flex justify-center items-end"
-              style={{ maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)' }}
+              className="absolute inset-x-0 bottom-0 flex justify-center items-end parallax-bg"
+              style={{
+                ...portraitStyle,
+                maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
+              }}
             >
               <img
                 src={userPhoto}
@@ -81,15 +100,17 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
             </div>
           </div>
 
-          {/* Right: Social Links (3 cols) */}
+          {/* Right: Social Links (3 cols) — each is magnetic */}
           <div className="col-span-12 lg:col-span-3 flex flex-row lg:flex-col justify-center lg:justify-start gap-3 lg:self-center">
-            {socialLinks.map(({ label, href, Icon }) => (
+            {socialLinks.map(({ label, href, Icon, ref: sRef, style: sStyle }) => (
               <a
                 key={label}
                 href={href}
+                ref={sRef as React.RefObject<HTMLAnchorElement>}
+                style={sStyle}
                 target={href.startsWith('http') ? '_blank' : undefined}
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-3 py-2 rounded-full border border-[#d0d0c8] bg-white/60 text-sm font-medium text-[#0a0a0a] hover:bg-white hover:border-[#a0a098] hover:shadow-sm transition-all group"
+                className="magnetic-card glow-hover flex items-center gap-2 px-3 py-2 rounded-full border border-[#d0d0c8] bg-white/60 text-sm font-medium text-[#0a0a0a] hover:bg-white transition-colors group"
               >
                 <Icon className="w-4 h-4 text-[#525252] group-hover:text-[#0a0a0a] transition-colors shrink-0" />
                 <span className="hidden sm:inline">{label}</span>

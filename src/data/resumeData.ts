@@ -307,7 +307,7 @@ export const projects: ProjectItem[] = [
       "Knowledgebase repository for recurring hardware/network troubleshooting steps",
       "Automated email/notification prompts upon ticket escalation"
     ],
-    techStack: ["PHP", "Laravel Blade Syntax", "MySQL", "Tailwind CSS", "JavaScript"],
+    techStack: ["PHP 8.1+", "MySQL", "Blade Templates", "JavaScript", "Vite"],
     architecture: "MVC Architecture with RESTful route handlers, relational MySQL database for users and ticket logs, and role-based access control (User vs. Admin/Analyst).",
     demoType: "ticketing"
   },
@@ -327,5 +327,24 @@ export const projects: ProjectItem[] = [
     techStack: ["PHP", "MongoDB", "Laravel Blade Syntax", "Bootstrap / CSS", "JavaScript"],
     architecture: "PHP backend integrated with MongoDB PHP extension, handling JSON documents for flexible catalog schema and fast read operations.",
     demoType: "cafeteria"
+  },
+  {
+    id: "id-management-system",
+    title: "ID Management System",
+    status: "In Progress",
+    category: "ID Management / Systems",
+    description: "A web-based ID issuance and tracking platform that allows users to submit ID requests, monitor real-time processing status, and gives administrators full visibility over the entire ID lifecycle — from submission to release.",
+    features: [
+      "Self-service ID request portal with form validation and photo upload for employees or students",
+      "Real-time status tracking dashboard — users see every stage: Submitted → Reviewing → Printing → Ready for Pickup → Released",
+      "Admin panel with batch approval, rejection notes, and priority queuing for bulk ID requests",
+      "Automated email/SMS notifications triggered at each status change to keep requestors informed",
+      "Audit trail and transparency log — every action (approval, reprint, reissue) is time-stamped and attributed to a staff member",
+      "Reprint and lost-card replacement workflow with reason tagging and supervisor sign-off",
+      "Report generation for total IDs issued, pending queue size, average processing time per department"
+    ],
+    techStack: ["PHP", "Laravel", "MySQL", "Tailwind CSS", "JavaScript", "Laravel Queues"],
+    architecture: "MVC Architecture with a relational MySQL schema for users, ID requests, and audit logs. Laravel Queues handle async notification dispatch. Role-based access: Requester, Staff Processor, and Admin.",
+    demoType: "id-management"
   }
 ];

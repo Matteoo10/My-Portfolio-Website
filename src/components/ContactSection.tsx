@@ -12,6 +12,8 @@ import {
   Sparkles
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useMagneticHover } from '../hooks/useMagneticHover';
 
 export const ContactSection: React.FC = () => {
   const [name, setName] = useState('');
@@ -20,6 +22,23 @@ export const ContactSection: React.FC = () => {
   const [message, setMessage] = useState('');
   const [isSent, setIsSent] = useState(false);
   const [ticketRef, setTicketRef] = useState('');
+
+  // Scroll reveal
+  const { ref: headerRef, isVisible: headerVisible } = useScrollReveal({ threshold: 0.1 });
+
+  // Magnetic hover on contact info cards
+  const { ref: emailCardRef, style: emailCardStyle } = useMagneticHover(0.22);
+  const { ref: phoneCardRef, style: phoneCardStyle } = useMagneticHover(0.22);
+  const { ref: ghBtnRef, style: ghBtnStyle } = useMagneticHover(0.25);
+  const { ref: liBtnRef, style: liBtnStyle } = useMagneticHover(0.25);
+
+  // Magnetic on submit button
+  const { ref: submitRef, style: submitStyle } = useMagneticHover(0.28);
+
+  // Scroll reveal for form panel
+  const { ref: formRevealRef, isVisible: formVisible } = useScrollReveal({ delay: 120 });
+  // Scroll reveal for left col
+  const { ref: leftRevealRef, isVisible: leftVisible } = useScrollReveal({ delay: 40 });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,7 +60,10 @@ export const ContactSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="mb-14">
+        <div
+          ref={headerRef as React.RefObject<HTMLDivElement>}
+          className={`mb-14 reveal-block ${headerVisible ? 'is-visible' : ''}`}
+        >
           <div className="inline-flex items-center gap-2 text-xs font-medium text-[#525252] uppercase tracking-widest mb-3 px-3 py-1 rounded-full border border-[#d0d0c8] bg-white/60">
             <MessageSquare className="w-3.5 h-3.5" />
             <span>Hiring &amp; Inquiry Channel</span>
@@ -57,12 +79,17 @@ export const ContactSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Left Side: Contact Info */}
-          <div className="lg:col-span-5 space-y-4">
+          <div
+            ref={leftRevealRef as React.RefObject<HTMLDivElement>}
+            className={`lg:col-span-5 space-y-4 reveal-block ${leftVisible ? 'is-visible' : ''}`}
+          >
             
             {/* Direct Email */}
             <a 
               href={`mailto:${personalInfo.email}`}
-              className="card-hover p-5 rounded-2xl bg-white border border-[#e0e0d8] flex items-start gap-4 group block"
+              ref={emailCardRef as React.RefObject<HTMLAnchorElement>}
+              style={emailCardStyle}
+              className="magnetic-card glow-hover p-5 rounded-2xl bg-white border border-[#d0d0c8] flex items-start gap-4 group block"
             >
               <div className="p-3 rounded-xl bg-[#f5f5f0] border border-[#e0e0d8] group-hover:bg-[#0a0a0a] group-hover:border-[#0a0a0a] transition-all">
                 <Mail className="w-5 h-5 text-[#525252] group-hover:text-white transition-colors" />
@@ -79,7 +106,9 @@ export const ContactSection: React.FC = () => {
             {/* Phone */}
             <a 
               href={`tel:${personalInfo.phone}`}
-              className="card-hover p-5 rounded-2xl bg-white border border-[#e0e0d8] flex items-start gap-4 group block"
+              ref={phoneCardRef as React.RefObject<HTMLAnchorElement>}
+              style={phoneCardStyle}
+              className="magnetic-card glow-hover p-5 rounded-2xl bg-white border border-[#d0d0c8] flex items-start gap-4 group block"
             >
               <div className="p-3 rounded-xl bg-[#f5f5f0] border border-[#e0e0d8] group-hover:bg-[#0a0a0a] group-hover:border-[#0a0a0a] transition-all">
                 <Phone className="w-5 h-5 text-[#525252] group-hover:text-white transition-colors" />
@@ -111,7 +140,9 @@ export const ContactSection: React.FC = () => {
                 href={personalInfo.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-2 p-3 rounded-xl bg-white border border-[#e0e0d8] text-sm font-medium text-[#0a0a0a] hover:bg-[#0a0a0a] hover:text-white hover:border-[#0a0a0a] transition-all"
+                ref={ghBtnRef as React.RefObject<HTMLAnchorElement>}
+                style={ghBtnStyle}
+                className="magnetic-btn glow-hover flex-1 flex items-center justify-center gap-2 p-3 rounded-xl bg-white border border-[#d0d0c8] text-sm font-medium text-[#0a0a0a] hover:bg-[#0a0a0a] hover:text-white hover:border-[#0a0a0a] transition-colors"
               >
                 <Github className="w-4 h-4" />
                 GitHub
@@ -120,7 +151,9 @@ export const ContactSection: React.FC = () => {
                 href={personalInfo.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-2 p-3 rounded-xl bg-white border border-[#e0e0d8] text-sm font-medium text-[#0a0a0a] hover:bg-[#0a0a0a] hover:text-white hover:border-[#0a0a0a] transition-all"
+                ref={liBtnRef as React.RefObject<HTMLAnchorElement>}
+                style={liBtnStyle}
+                className="magnetic-btn glow-hover flex-1 flex items-center justify-center gap-2 p-3 rounded-xl bg-white border border-[#d0d0c8] text-sm font-medium text-[#0a0a0a] hover:bg-[#0a0a0a] hover:text-white hover:border-[#0a0a0a] transition-colors"
               >
                 <Linkedin className="w-4 h-4" />
                 LinkedIn
@@ -138,7 +171,10 @@ export const ContactSection: React.FC = () => {
           </div>
 
           {/* Right Side: Contact Form */}
-          <div className="lg:col-span-7 bg-white border border-[#e0e0d8] rounded-2xl p-6 sm:p-8 shadow-sm">
+          <div
+            ref={formRevealRef as React.RefObject<HTMLDivElement>}
+            className={`lg:col-span-7 bg-white border border-[#d0d0c8] rounded-2xl p-6 sm:p-8 shadow-sm reveal-block ${formVisible ? 'is-visible' : ''}`}
+          >
             
             {isSent ? (
               <div className="text-center py-12 space-y-4">
@@ -218,8 +254,10 @@ export const ContactSection: React.FC = () => {
                   </div>
 
                   <button
+                    ref={submitRef as React.RefObject<HTMLButtonElement>}
                     type="submit"
-                    className="w-full py-3 rounded-xl bg-[#0a0a0a] hover:bg-[#262626] font-bold text-white text-sm transition-all flex items-center justify-center gap-2"
+                    style={submitStyle}
+                    className="magnetic-btn glow-hover w-full py-3 rounded-xl bg-[#0a0a0a] hover:bg-[#262626] font-bold text-white text-sm transition-colors flex items-center justify-center gap-2 border border-transparent"
                   >
                     <Send className="w-4 h-4" />
                     <span>Send Message</span>
@@ -235,7 +273,7 @@ export const ContactSection: React.FC = () => {
       {/* Footer */}
       <div className="mt-20 border-t border-[#e0e0d8] pt-8 text-center">
         <p className="text-xs text-[#a0a098] font-mono">
-          © {new Date().getFullYear()} Christian Matthew P. Dator — IT Support Specialist & Junior IT Analyst
+          © {new Date().getFullYear()} Christian Matthew P. Dator — IT Support Specialist &amp; Junior IT Analyst
         </p>
       </div>
     </section>

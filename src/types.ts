@@ -68,10 +68,10 @@ export interface ProjectItem {
   id: string;
   title: string;
   status: 'In Progress' | 'Completed';
-  category: 'IT Support / Systems' | 'Web Development';
+  category: 'IT Support / Systems' | 'Web Development' | 'ID Management / Systems';
   description: string;
   features: string[];
   techStack: string[];
   architecture?: string;
-  demoType: 'ticketing' | 'cafeteria';
+  demoType: 'ticketing' | 'cafeteria' | 'id-management';
 }
