@@ -157,7 +157,7 @@ School Cafeteria Web Portal | Capstone
         </div>
 
         {/* Resume Content Paper View */}
-        <div className="p-6 sm:p-10 overflow-y-auto space-y-6 text-slate-800 bg-white font-sans text-xs sm:text-sm custom-scrollbar print:p-0 print:m-0 print:bg-white print:text-black print:overflow-visible print:max-h-none print:h-auto">
+        <div className="p-6 sm:p-10 overflow-y-auto space-y-6 text-slate-800 bg-white font-sans text-xs sm:text-sm custom-scrollbar print-paper-content print:p-0 print:m-0 print:bg-white print:text-black print:overflow-visible print:max-h-none print:h-auto">
           
           {/* Header */}
           <div className="text-center border-b-2 border-slate-800 pb-4">

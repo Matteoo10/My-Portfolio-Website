@@ -100,13 +100,15 @@
 
 /* ─── Print Styles ────────────────────────────────────────────────────────── */
 @media print {
+  @page {
+    margin: 0;
+    size: auto;
+  }
   body {
     background-color: #ffffff !important;
     color: #000000 !important;
-  }
-  @page {
-    margin: 12mm 15mm;
-    size: auto;
+    margin: 0 !important;
+    padding: 0 !important;
   }
   .print\:hidden {
     display: none !important;
@@ -128,6 +130,9 @@
   }
   .print\:overflow-visible {
     overflow: visible !important;
+  }
+  .print-paper-content {
+    padding: 15mm 18mm !important;
   }
 }
 
