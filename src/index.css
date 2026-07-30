@@ -131,6 +131,9 @@
   .print\:overflow-visible {
     overflow: visible !important;
   }
+  canvas {
+    display: none !important;
+  }
   .print-paper-content {
     padding: 15mm 18mm !important;
   }

@@ -8,7 +8,6 @@ import {
   FileText,
   Download
 } from 'lucide-react';
-import confetti from 'canvas-confetti';
 
 interface ResumeModalProps {
   isOpen: boolean;
@@ -69,19 +68,7 @@ School Cafeteria Web Portal | Capstone
   };
 
   const handlePrint = () => {
-    try {
-      confetti({
-        particleCount: 40,
-        spread: 50,
-        origin: { y: 0.6 }
-      });
-    } catch (e) {
-      console.warn("Confetti skipped:", e);
-    }
-    
-    setTimeout(() => {
-      window.print();
-    }, 150);
+    window.print();
   };
 
   const handleCopyText = () => {
