@@ -36,13 +36,13 @@ export const Hero: React.FC<HeroProps> = () => {
 
       {/* ── Large Display Name Behind Everything (parallax background layer) ── */}
       <div
-        className="absolute inset-x-0 top-0 flex items-start justify-center pointer-events-none select-none overflow-hidden parallax-bg"
+        className="absolute inset-x-0 top-[6%] sm:top-[8%] flex items-start justify-center pointer-events-none select-none overflow-hidden parallax-bg"
         aria-hidden="true"
         style={bgNameStyle}
       >
         <span
           className="font-display leading-none tracking-tight whitespace-nowrap"
-          style={{ fontSize: 'clamp(3.5rem, 10vw, 10rem)', lineHeight: 0.88 }}
+          style={{ fontSize: 'clamp(4rem, 11.5vw, 11.5rem)', lineHeight: 0.88 }}
         >
           <span className="text-outline">CHRISTIAN </span>
           <span className="text-[#0a0a0a]">DATOR</span>
