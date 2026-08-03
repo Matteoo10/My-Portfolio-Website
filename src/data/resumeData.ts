@@ -284,11 +284,13 @@ export const skillGroups: SkillGroup[] = [
   {
     category: "Web Development & Databases",
     iconName: "Code",
-    description: "Building web platforms and application logic.",
+    description: "Building modern web applications and NoSQL database schemas.",
     skills: [
-      { name: "C++ Programming", level: 25, highlight: true },
-      { name: "Laravel Blade Syntax", level: 28, highlight: true },
-      { name: "JavaScript", level: 30, highlight: true }
+      { name: "TypeScript", level: 65, highlight: true },
+      { name: "HTML & CSS", level: 75, highlight: true },
+      { name: "Tailwind CSS v4", level: 70, highlight: true },
+      { name: "MongoDB Database", level: 60, highlight: true },
+      { name: "C++ Programming", level: 25 }
     ]
   }
 ];
@@ -343,8 +345,8 @@ export const projects: ProjectItem[] = [
       "Reprint and lost-card replacement workflow with reason tagging and supervisor sign-off",
       "Report generation for total IDs issued, pending queue size, average processing time per department"
     ],
-    techStack: ["PHP", "Laravel", "MySQL", "Tailwind CSS", "JavaScript", "Laravel Queues"],
-    architecture: "MVC Architecture with a relational MySQL schema for users, ID requests, and audit logs. Laravel Queues handle async notification dispatch. Role-based access: Requester, Staff Processor, and Admin.",
+    techStack: ["TypeScript", "HTML", "CSS", "Tailwind CSS v4", "MongoDB"],
+    architecture: "Modern web architecture with TypeScript logic, HTML5 structure, custom CSS and Tailwind CSS v4 styling, backed by a high-performance NoSQL MongoDB database for flexible ID request documents, user profiles, and audit trails.",
     demoType: "id-management"
   }
 ];
