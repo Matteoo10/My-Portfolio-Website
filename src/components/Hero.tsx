@@ -1,32 +1,29 @@
 import React, { useState } from 'react';
 import { personalInfo } from '../data/resumeData';
-import { Github, Linkedin, Mail, ArrowUpRight, MapPin } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowUpRight } from 'lucide-react';
 import { useParallax } from '../hooks/useParallax';
-import { useMagneticHover } from '../hooks/useMagneticHover';
+import { useCinematicSection, useCinematicParallax, useCinematicPortraitReveal } from '../hooks/useCinematicScroll';
 
 interface HeroProps {
   onOpenResume: () => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
+export const Hero: React.FC<HeroProps> = () => {
   const [userPhoto] = useState<string>(personalInfo.profileImage);
+
+  // Section GSAP timeline hook
+  const heroContainerRef = useCinematicSection<HTMLDivElement>({ triggerStart: 'top 95%' });
+  const portraitContainerRef = useCinematicPortraitReveal<HTMLDivElement>();
 
   // Parallax: display name drifts slowest (background layer)
   const { style: bgNameStyle } = useParallax(0.4);
-  // Parallax: portrait drifts slightly faster than name but slower than text
-  const { style: portraitStyle } = useParallax(0.18);
-
-  // Magnetic for primary CTA button
-  const { ref: ctaRef, style: ctaStyle } = useMagneticHover(0.3);
-  // Magnetic for each social link
-  const { ref: ghRef, style: ghStyle } = useMagneticHover(0.25);
-  const { ref: liRef, style: liStyle } = useMagneticHover(0.25);
-  const { ref: mailRef, style: mailStyle } = useMagneticHover(0.25);
+  // Parallax: GSAP scrubbed portrait drift
+  const portraitRef = useCinematicParallax<HTMLImageElement>(-12);
 
   const socialLinks = [
-    { label: 'GitHub', href: personalInfo.github, Icon: Github, ref: ghRef, style: ghStyle },
-    { label: 'LinkedIn', href: personalInfo.linkedin, Icon: Linkedin, ref: liRef, style: liStyle },
-    { label: 'Email', href: `mailto:${personalInfo.email}`, Icon: Mail, ref: mailRef, style: mailStyle },
+    { label: 'GitHub', href: personalInfo.github, Icon: Github },
+    { label: 'LinkedIn', href: personalInfo.linkedin, Icon: Linkedin },
+    { label: 'Email', href: `mailto:${personalInfo.email}`, Icon: Mail },
   ];
 
   const scrollToContact = () => {
@@ -35,7 +32,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
   };
 
   return (
-    <section id="hero" className="relative bg-[#f5f5f0] overflow-hidden" style={{ minHeight: 'calc(100vh - 64px)' }}>
+    <section id="hero" ref={heroContainerRef} className="relative bg-[#f5f5f0] overflow-hidden" style={{ minHeight: 'calc(100vh - 64px)' }}>
 
       {/* ── Large Display Name Behind Everything (parallax background layer) ── */}
       <div
@@ -54,25 +51,23 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
 
       {/* ── Content Grid ── */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full" style={{ minHeight: 'calc(100vh - 64px)' }}>
-        <div className="grid grid-cols-12 gap-4 h-full items-end pb-12 pt-8">
+        <div className="grid grid-cols-12 gap-4 h-full items-end pt-8">
 
           {/* Left: Title & Bio (3 cols) */}
-          <div className="col-span-12 lg:col-span-3 space-y-6 lg:self-center">
-            <div>
+          <div className="col-span-12 lg:col-span-3 space-y-6 lg:self-center pb-8 lg:pb-12">
+            <div data-gsap="heading">
               <p className="text-sm font-semibold text-[#0a0a0a] uppercase tracking-widest mb-1">
                 IT Support Specialist
               </p>
-              <p className="text-sm text-[#525252] leading-relaxed max-w-xs">
+              <p data-gsap="description" className="text-sm text-[#525252] leading-relaxed max-w-xs">
                 Designing stable, secure IT environments — from network configuration to user support and web development.
               </p>
             </div>
 
-            <div className="space-y-3">
+            <div data-gsap="card" className="space-y-3">
               <button
-                ref={ctaRef as React.RefObject<HTMLButtonElement>}
                 onClick={scrollToContact}
-                style={ctaStyle}
-                className="magnetic-btn glow-hover inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold bg-[#0a0a0a] text-white hover:bg-[#262626] transition-colors group border border-transparent"
+                className="glow-hover inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold bg-[#0a0a0a] text-white hover:bg-[#262626] transition-all hover:scale-105 active:scale-95 group border border-transparent shadow-md"
               >
                 <span>Let's collaborate</span>
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -80,37 +75,37 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
             </div>
           </div>
 
-          {/* Center: Portrait (6 cols) — parallax at intermediate speed */}
-          <div className="col-span-12 lg:col-span-6 relative" style={{ minHeight: 'calc(100vh - 64px)' }}>
+          {/* Center: Portrait (6 cols) — GSAP scrubbed parallax & reveal */}
+          <div ref={portraitContainerRef} className="col-span-12 lg:col-span-6 relative flex justify-center items-end" style={{ minHeight: 'calc(100vh - 64px)' }}>
+
             <div
-              className="absolute inset-x-0 bottom-0 flex justify-center items-end parallax-bg"
+              ref={portraitRef}
+              className="absolute inset-x-0 bottom-0 flex justify-center items-end group cursor-pointer"
               style={{
-                ...portraitStyle,
-                maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
-                WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
+                maskImage: 'linear-gradient(to bottom, black 75%, transparent 98%)',
+                WebkitMaskImage: 'linear-gradient(to bottom, black 75%, transparent 98%)',
               }}
             >
               <img
                 src={userPhoto}
                 alt="Christian Matthew P. Dator"
                 referrerPolicy="no-referrer"
-                className="w-full h-auto object-cover object-top filter grayscale contrast-105 brightness-105 transition-all duration-700 hover:grayscale-0"
-                style={{ maxHeight: '92vh', maxWidth: '520px' }}
+                className="w-full h-auto object-cover object-top mix-blend-multiply filter grayscale contrast-105 brightness-105 scale-110 sm:scale-115 origin-[50%_25%] transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-[1.28] group-hover:contrast-110"
+                style={{ maxHeight: '102vh', maxWidth: '780px' }}
               />
             </div>
           </div>
 
-          {/* Right: Social Links (3 cols) — each is magnetic */}
-          <div className="col-span-12 lg:col-span-3 flex flex-row lg:flex-col justify-center lg:justify-start gap-3 lg:self-center">
-            {socialLinks.map(({ label, href, Icon, ref: sRef, style: sStyle }) => (
+          {/* Right: Social Links (3 cols) */}
+          <div className="col-span-12 lg:col-span-3 flex flex-row lg:flex-col justify-center lg:justify-start gap-3 lg:self-center pb-8 lg:pb-12">
+            {socialLinks.map(({ label, href, Icon }) => (
               <a
                 key={label}
                 href={href}
-                ref={sRef as React.RefObject<HTMLAnchorElement>}
-                style={sStyle}
+                data-gsap="card"
                 target={href.startsWith('http') ? '_blank' : undefined}
                 rel="noopener noreferrer"
-                className="magnetic-card glow-hover flex items-center gap-2 px-3 py-2 rounded-full border border-[#d0d0c8] bg-white/60 text-sm font-medium text-[#0a0a0a] hover:bg-white transition-colors group"
+                className="glow-hover flex items-center gap-2 px-3 py-2 rounded-full border border-[#d0d0c8] bg-white/60 text-sm font-medium text-[#0a0a0a] hover:bg-white transition-all hover:-translate-y-0.5 hover:shadow-md group"
               >
                 <Icon className="w-4 h-4 text-[#525252] group-hover:text-[#0a0a0a] transition-colors shrink-0" />
                 <span className="hidden sm:inline">{label}</span>

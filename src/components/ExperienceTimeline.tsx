@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { useMagneticHover } from '../hooks/useMagneticHover';
+import { useCinematicSection } from '../hooks/useCinematicScroll';
 
 // ── Sub-components to each get their own hooks ──────────────────────────────
 
@@ -190,25 +191,22 @@ const StrengthsCard: React.FC = () => {
 // ── Main Section ─────────────────────────────────────────────────────────────
 
 export const ExperienceTimeline: React.FC = () => {
-  const { ref: headerRef, isVisible: headerVisible } = useScrollReveal({ threshold: 0.1 });
+  const sectionRef = useCinematicSection<HTMLElement>({ triggerStart: 'top 80%' });
 
   return (
-    <section id="experience" className="py-20 bg-white border-t border-[#e0e0d8]">
+    <section id="experience" ref={sectionRef} className="py-20 bg-white border-t border-[#e0e0d8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div
-          ref={headerRef as React.RefObject<HTMLDivElement>}
-          className={`mb-14 reveal-block ${headerVisible ? 'is-visible' : ''}`}
-        >
-          <div className="inline-flex items-center gap-2 text-xs font-medium text-[#525252] uppercase tracking-widest mb-3 px-3 py-1 rounded-full border border-[#d0d0c8] bg-[#f5f5f0]">
+        <div className="mb-14">
+          <div data-gsap="heading" className="inline-flex items-center gap-2 text-xs font-medium text-[#525252] uppercase tracking-widest mb-3 px-3 py-1 rounded-full border border-[#d0d0c8] bg-[#f5f5f0]">
             <Briefcase className="w-3.5 h-3.5" />
             <span>Career History</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-display text-[#0a0a0a] tracking-tight">
+          <h2 data-gsap="heading" className="text-3xl sm:text-5xl font-display text-[#0a0a0a] tracking-tight">
             Work Experience<br /><span className="text-outline-thin">&amp; Education</span>
           </h2>
-          <p className="mt-4 text-sm sm:text-base text-[#525252] max-w-xl">
+          <p data-gsap="description" className="mt-4 text-sm sm:text-base text-[#525252] max-w-xl">
             Proven track record supporting high-availability IT environments, network equipment maintenance, and web application development.
           </p>
         </div>
@@ -218,27 +216,33 @@ export const ExperienceTimeline: React.FC = () => {
           
           {/* Left Side: Work History (7 cols) */}
           <div className="lg:col-span-7 space-y-5">
-            <h3 className="text-sm font-semibold text-[#0a0a0a] uppercase tracking-widest flex items-center gap-2 pb-3 border-b border-[#e0e0d8]">
+            <h3 data-gsap="heading" className="text-sm font-semibold text-[#0a0a0a] uppercase tracking-widest flex items-center gap-2 pb-3 border-b border-[#e0e0d8]">
               <Briefcase className="w-4 h-4" />
               Professional IT Work Experience
             </h3>
 
             <div className="space-y-5">
               {workExperience.map((exp, i) => (
-                <ExperienceCard key={exp.id} exp={exp} delay={i * 80} />
+                <div key={exp.id} data-gsap="card">
+                  <ExperienceCard exp={exp} delay={i * 80} />
+                </div>
               ))}
             </div>
           </div>
 
           {/* Right Side: Education (5 cols) */}
           <div className="lg:col-span-5 space-y-5">
-            <h3 className="text-sm font-semibold text-[#0a0a0a] uppercase tracking-widest flex items-center gap-2 pb-3 border-b border-[#e0e0d8]">
+            <h3 data-gsap="heading" className="text-sm font-semibold text-[#0a0a0a] uppercase tracking-widest flex items-center gap-2 pb-3 border-b border-[#e0e0d8]">
               <GraduationCap className="w-4 h-4" />
               Education &amp; Qualifications
             </h3>
 
-            <EducationCard />
-            <StrengthsCard />
+            <div data-gsap="card">
+              <EducationCard />
+            </div>
+            <div data-gsap="card">
+              <StrengthsCard />
+            </div>
           </div>
 
         </div>

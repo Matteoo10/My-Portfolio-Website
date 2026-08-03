@@ -1,17 +1,30 @@
 import { useEffect, useRef, useState } from 'react';
 
-interface ScrollRevealOptions {
+export type RevealVariant = 
+  | 'fade-up' 
+  | 'fade-down' 
+  | 'fade-left' 
+  | 'fade-right' 
+  | 'scale'
+  | 'heading'
+  | 'text'
+  | 'profile-pic'
+  | 'card-rotate';
+
+export interface ScrollRevealOptions {
   threshold?: number;
-  delay?: number; // ms — used for staggered reveals in lists
+  delay?: number; // ms — used for staggered reveals
+  rootMargin?: string;
+  variant?: RevealVariant;
 }
 
 /**
- * useScrollReveal — returns isVisible once element crosses the viewport threshold.
- * Once visible, stays visible (no hiding on scroll-up).
+ * useScrollReveal — returns isVisible once element crosses the viewport threshold (0.15).
+ * Once visible, stays visible permanently (fire once per element).
  */
-export function useScrollReveal(options: ScrollRevealOptions = {}) {
-  const { threshold = 0.12, delay = 0 } = options;
-  const ref = useRef<HTMLElement | null>(null);
+export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(options: ScrollRevealOptions = {}) {
+  const { threshold = 0.15, delay = 0, rootMargin = '0px 0px -40px 0px', variant = 'fade-up' } = options;
+  const ref = useRef<T | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -25,11 +38,18 @@ export function useScrollReveal(options: ScrollRevealOptions = {}) {
     const el = ref.current;
     if (!el) return;
 
+    // Initial check: if element is already within the top viewport on load, reveal immediately
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      setIsVisible(true);
+      return;
+    }
+
     let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !isVisible) {
+        if (entry.isIntersecting) {
           if (delay > 0) {
             timeoutId = setTimeout(() => setIsVisible(true), delay);
           } else {
@@ -38,7 +58,7 @@ export function useScrollReveal(options: ScrollRevealOptions = {}) {
           observer.unobserve(el); // fire once
         }
       },
-      { threshold }
+      { threshold, rootMargin }
     );
 
     observer.observe(el);
@@ -47,8 +67,10 @@ export function useScrollReveal(options: ScrollRevealOptions = {}) {
       observer.disconnect();
       if (timeoutId !== null) clearTimeout(timeoutId);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [threshold, delay]);
+  }, [threshold, delay, rootMargin]);
 
-  return { ref, isVisible };
+  const className = `reveal-init reveal-variant-${variant} ${isVisible ? 'reveal-visible' : ''}`;
+
+  return { ref, isVisible, className };
 }
+
