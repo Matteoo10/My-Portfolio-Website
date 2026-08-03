@@ -90,8 +90,8 @@ export const Hero: React.FC<HeroProps> = () => {
                 src={userPhoto}
                 alt="Christian Matthew P. Dator"
                 referrerPolicy="no-referrer"
-                className="w-full h-auto object-cover object-top mix-blend-multiply filter grayscale contrast-105 brightness-105 scale-110 sm:scale-115 origin-[50%_25%] transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-[1.28] group-hover:contrast-110"
-                style={{ maxHeight: '102vh', maxWidth: '780px' }}
+                className="w-full h-auto object-cover object-top mix-blend-multiply filter grayscale contrast-105 brightness-105 origin-[50%_25%] transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-[1.12] group-hover:contrast-110"
+                style={{ maxHeight: '88vh', maxWidth: '560px' }}
               />
             </div>
           </div>
