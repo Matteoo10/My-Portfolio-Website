@@ -32,7 +32,7 @@ export const Hero: React.FC<HeroProps> = () => {
   };
 
   return (
-    <section id="hero" ref={heroContainerRef} className="relative bg-[#f5f5f0] overflow-hidden" style={{ minHeight: 'calc(100vh - 64px)' }}>
+    <section id="hero" ref={heroContainerRef} className="relative bg-[#f5f5f0] overflow-hidden" style={{ isolation: 'isolate', minHeight: 'calc(100vh - 64px)' }}>
 
       {/* ── Large Display Name Behind Everything (parallax background layer) ── */}
       <div
@@ -84,6 +84,10 @@ export const Hero: React.FC<HeroProps> = () => {
               style={{
                 maskImage: 'linear-gradient(to bottom, black 75%, transparent 98%)',
                 WebkitMaskImage: 'linear-gradient(to bottom, black 75%, transparent 98%)',
+                maskSize: '100% 100%',
+                WebkitMaskSize: '100% 100%',
+                maskRepeat: 'no-repeat',
+                WebkitMaskRepeat: 'no-repeat',
               }}
             >
               <img
