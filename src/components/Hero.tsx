@@ -95,7 +95,7 @@ export const Hero: React.FC<HeroProps> = () => {
                 alt="Christian Matthew P. Dator"
                 referrerPolicy="no-referrer"
                 className="w-full h-auto object-cover object-top mix-blend-multiply filter grayscale contrast-105 brightness-105 origin-[50%_25%] transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-[1.12] group-hover:contrast-110"
-                style={{ maxHeight: '88vh', maxWidth: '560px' }}
+                style={{ maxHeight: '94vh', maxWidth: '640px' }}
               />
             </div>
           </div>
