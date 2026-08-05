@@ -74,4 +74,5 @@ export interface ProjectItem {
   techStack: string[];
   architecture?: string;
   demoType: 'ticketing' | 'cafeteria' | 'id-management';
+  images?: string[];
 }

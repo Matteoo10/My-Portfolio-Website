@@ -298,19 +298,25 @@ export const skillGroups: SkillGroup[] = [
 export const projects: ProjectItem[] = [
   {
     id: "it-ticketing-system",
-    title: "IT Support Ticketing System",
+    title: "OmniTick — IT Support Ticketing System",
     status: "In Progress",
     category: "IT Support / Systems",
-    description: "Developing a web-based system for logging, categorizing, prioritizing, tracking, and documenting IT support requests and resolutions across organizations.",
-    features: [
-      "Ticket creation with auto-classification based on severity (P1 Critical to P4 Low)",
-      "Resolution timer & SLA tracking dashboard for IT support analysts",
-      "Equipment asset tagging & history log linked to each support ticket",
-      "Knowledgebase repository for recurring hardware/network troubleshooting steps",
-      "Automated email/notification prompts upon ticket escalation"
+    images: [
+      `${import.meta.env.BASE_URL}omnitick-dashboard.png`,
+      `${import.meta.env.BASE_URL}omnitick-landing.png`,
+      `${import.meta.env.BASE_URL}omnitick-form.png`
     ],
-    techStack: ["PHP 8.1+", "MySQL", "Blade Templates", "JavaScript", "Vite"],
-    architecture: "MVC Architecture with RESTful route handlers, relational MySQL database for users and ticket logs, and role-based access control (User vs. Admin/Analyst).",
+    description: "OmniTick is an enterprise web-based IT support portal and technician incident management system designed for logging, auto-prioritizing, queuing, tracking, and resolving IT service requests across organizations.",
+    features: [
+      "Self-service ticket submission portal with ID number validation & automatic issue prioritization",
+      "Live Support Queue widget displaying real-time active request status & team availability",
+      "Technician Incident Management Dashboard (Dark Mode) with queue status counters (Open, In Progress, Unassigned, Closed)",
+      "Role-based technician authentication, ticket assignment, and incident lifecycle tracking",
+      "Centralized incidents data table with requester info, priority ratings, and assignment controls",
+      "Service desk analytics, user management, and automated support ticket workflow"
+    ],
+    techStack: ["PHP 8.1+", "Laravel / Blade", "MySQL", "JavaScript", "Tailwind CSS"],
+    architecture: "MVC Architecture with RESTful route handlers, relational MySQL database for incident logs & user accounts, and role-based access control (User vs. Technician/Admin).",
     demoType: "ticketing"
   },
   {
@@ -318,6 +324,9 @@ export const projects: ProjectItem[] = [
     title: "School Cafeteria Web Portal (Capstone)",
     status: "Completed",
     category: "Web Development",
+    images: [
+      `${import.meta.env.BASE_URL}cafeteria.png`
+    ],
     description: "Academic Capstone Project built for Universidad de Manila to streamline food ordering, inventory monitoring, and cafeteria operations.",
     features: [
       "Dynamic menu item catalog with stock availability indicators",
@@ -335,6 +344,9 @@ export const projects: ProjectItem[] = [
     title: "ID Management System",
     status: "In Progress",
     category: "ID Management / Systems",
+    images: [
+      `${import.meta.env.BASE_URL}id-management.png`
+    ],
     description: "A web-based ID issuance and tracking platform that allows users to submit ID requests, monitor real-time processing status, and gives administrators full visibility over the entire ID lifecycle — from submission to release.",
     features: [
       "Self-service ID request portal with form validation and photo upload for employees or students",
