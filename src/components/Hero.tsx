@@ -1,11 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { personalInfo } from '../data/resumeData';
 import { Github, Linkedin, Mail, ArrowUpRight } from 'lucide-react';
 import { useParallax } from '../hooks/useParallax';
 import { useCinematicSection, useCinematicParallax, useCinematicPortraitReveal } from '../hooks/useCinematicScroll';
+import gsap from 'gsap';
 
 interface HeroProps {
   onOpenResume: () => void;
+}
+
+// The line typed out in the terminal-style accent under the description.
+// Swap this for whatever line you want — keep it short, it reads better typed.
+const TYPED_LINE = 'status: available for new roles_';
+
+/**
+ * Types out `text` one character at a time on mount.
+ * Respects prefers-reduced-motion by rendering the full text immediately.
+ */
+function useTypewriter(text: string, speed = 32, startDelay = 700) {
+  const [displayed, setDisplayed] = useState('');
+  const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      setDisplayed(text);
+      setDone(true);
+      return;
+    }
+
+    let i = 0;
+    let interval: ReturnType<typeof setInterval>;
+    const startTimeout = setTimeout(() => {
+      interval = setInterval(() => {
+        i += 1;
+        setDisplayed(text.slice(0, i));
+        if (i >= text.length) {
+          clearInterval(interval);
+          setDone(true);
+        }
+      }, speed);
+    }, startDelay);
+
+    return () => {
+      clearTimeout(startTimeout);
+      clearInterval(interval);
+    };
+  }, [text, speed, startDelay]);
+
+  return { displayed, done };
 }
 
 export const Hero: React.FC<HeroProps> = () => {
@@ -19,6 +62,35 @@ export const Hero: React.FC<HeroProps> = () => {
   const { style: bgNameStyle } = useParallax(0.4);
   // Parallax: GSAP scrubbed portrait drift
   const portraitRef = useCinematicParallax<HTMLImageElement>(-12);
+
+  // Refs for the two words in the big background name — animated in on mount
+  const wordRefs = useRef<(HTMLSpanElement | null)[]>([]);
+
+  const { displayed: typedLine, done: typedDone } = useTypewriter(TYPED_LINE);
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const words = wordRefs.current.filter((el): el is HTMLSpanElement => el !== null);
+    if (prefersReducedMotion || words.length === 0) return;
+
+    // Scoped + auto-cleaned up on unmount — won't leak into other GSAP timelines
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        words,
+        { yPercent: 110, opacity: 0 },
+        {
+          yPercent: 0,
+          opacity: 1,
+          duration: 0.9,
+          ease: 'power4.out',
+          stagger: 0.12,
+          delay: 0.1,
+        }
+      );
+    });
+
+    return () => ctx.revert();
+  }, []);
 
   const socialLinks = [
     { label: 'GitHub', href: personalInfo.github, Icon: Github },
@@ -44,8 +116,23 @@ export const Hero: React.FC<HeroProps> = () => {
           className="font-display leading-none tracking-tight whitespace-nowrap"
           style={{ fontSize: 'clamp(4rem, 11.5vw, 11.5rem)', lineHeight: 0.88 }}
         >
-          <span className="text-outline">CHRISTIAN </span>
-          <span className="text-[#0a0a0a]">DATOR</span>
+          {/* Each word sits in an overflow-hidden mask so it can rise up into view on load */}
+          <span className="inline-block overflow-hidden align-bottom">
+            <span
+              ref={(el) => { wordRefs.current[0] = el; }}
+              className="text-outline inline-block will-change-transform"
+            >
+              CHRISTIAN&nbsp;
+            </span>
+          </span>
+          <span className="inline-block overflow-hidden align-bottom">
+            <span
+              ref={(el) => { wordRefs.current[1] = el; }}
+              className="text-[#0a0a0a] inline-block will-change-transform"
+            >
+              DATOR
+            </span>
+          </span>
         </span>
       </div>
 
@@ -61,6 +148,17 @@ export const Hero: React.FC<HeroProps> = () => {
               </p>
               <p data-gsap="description" className="text-sm text-[#525252] leading-relaxed max-w-xs">
                 Designing stable, secure IT environments — from network configuration to user support and web development.
+              </p>
+
+              {/* Terminal-style typed accent line */}
+              <p className="font-mono text-xs text-[#0a0a0a]/60 mt-3 tracking-tight">
+                <span aria-hidden="true">{'> '}</span>
+                <span aria-hidden="true">{typedLine}</span>
+                {!typedDone && (
+                  <span aria-hidden="true" className="typed-cursor">_</span>
+                )}
+                {/* Full line for screen readers, delivered immediately rather than character-by-character */}
+                <span className="sr-only">{TYPED_LINE}</span>
               </p>
             </div>
 

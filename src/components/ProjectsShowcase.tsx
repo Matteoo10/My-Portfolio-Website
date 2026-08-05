@@ -17,7 +17,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenLightbox }) =>
   return (
     <div
       data-gsap="card"
-      className="glow-hover bg-[#f5f5f0] border border-[#d0d0c8] rounded-2xl flex flex-col justify-start hover:-translate-y-1 hover:shadow-xl hover:border-[#0a0a0a] transition-all duration-300 overflow-hidden"
+      className="glow-hover bg-[#f5f5f0] border border-[#d0d0c8] rounded-2xl flex flex-col justify-start hover:-translate-y-1 hover:shadow-xl hover:border-[#0a0a0a] transition-[transform,box-shadow,border-color] duration-300 overflow-hidden"
     >
       <div>
         {/* Project Screenshot Gallery Showcase */}
@@ -36,11 +36,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenLightbox }) =>
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
 
-              {/* Hover overlay hint */}
+              {/* Hover overlay hint — terminal-style tag, matches the Hero's typed line motif */}
               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 backdrop-blur-[2px]">
-                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/90 text-[#0a0a0a] text-xs font-semibold shadow-lg">
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/90 text-[#0a0a0a] text-xs font-mono font-semibold shadow-lg">
                   <Maximize2 className="w-3.5 h-3.5" />
-                  <span>Click to expand view</span>
+                  <span>{'> expand_screenshot'}</span>
                 </span>
               </div>
 
@@ -58,11 +58,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenLightbox }) =>
                   <button
                     key={idx}
                     onClick={() => setActiveImageIndex(idx)}
-                    className={`relative rounded-md overflow-hidden border-2 transition-all h-10 w-16 shrink-0 ${
-                      activeImageIndex === idx
+                    className={`relative rounded-md overflow-hidden border-2 transition-[transform,border-color,opacity] h-10 w-16 shrink-0 ${activeImageIndex === idx
                         ? 'border-cyan-400 scale-105 shadow-md'
                         : 'border-white/20 opacity-60 hover:opacity-100'
-                    }`}
+                      }`}
                   >
                     <img
                       src={img}
@@ -83,11 +82,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenLightbox }) =>
               <span className="px-2.5 py-0.5 rounded-full text-xs font-mono font-semibold bg-[#0a0a0a] text-white">
                 {project.category}
               </span>
-              <span className={`text-xs px-2.5 py-0.5 rounded-full font-bold border ${
-                project.status === 'In Progress'
+              <span className={`text-xs px-2.5 py-0.5 rounded-full font-bold border ${project.status === 'In Progress'
                   ? 'bg-amber-50 text-amber-700 border-amber-200'
                   : 'bg-emerald-50 text-emerald-700 border-emerald-200'
-              }`}>
+                }`}>
                 {project.status}
               </span>
             </div>
@@ -182,7 +180,7 @@ export const ProjectsShowcase: React.FC = () => {
   return (
     <section id="projects" ref={sectionRef} className="py-20 bg-white border-t border-[#e0e0d8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
         <div className="mb-14">
           <div data-gsap="heading" className="inline-flex items-center gap-2 text-xs font-medium text-[#525252] uppercase tracking-widest mb-3 px-3 py-1 rounded-full border border-[#d0d0c8] bg-[#f5f5f0]">
@@ -214,7 +212,7 @@ export const ProjectsShowcase: React.FC = () => {
       {lightboxState.isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4 animate-in fade-in duration-200">
           <div className="relative max-w-6xl w-full flex flex-col items-center">
-            
+
             {/* Top Bar */}
             <div className="w-full flex items-center justify-between text-white mb-4 px-2">
               <h4 className="text-lg font-bold font-display">{lightboxState.title}</h4>

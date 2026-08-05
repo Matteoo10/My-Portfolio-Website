@@ -12,24 +12,34 @@ export default function App() {
 
   // Track active section on scroll
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['hero', 'experience', 'projects', 'contact'];
-      const scrollPos = window.scrollY + 200;
+    const sections = ['hero', 'experience', 'projects', 'contact'];
+    const els = sections
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
 
-      for (const sectionId of sections) {
-        const el = document.getElementById(sectionId);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
-            setActiveSection(sectionId);
-            break;
-          }
+    let ticking = false;
+
+    const updateActiveSection = () => {
+      const scrollPos = window.scrollY + 200;
+      for (const el of els) {
+        const top = el.offsetTop;
+        const height = el.offsetHeight;
+        if (scrollPos >= top && scrollPos < top + height) {
+          setActiveSection(el.id);
+          break;
         }
+      }
+      ticking = false;
+    };
+
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(updateActiveSection);
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -43,7 +53,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#f5f5f0] text-[#0a0a0a] font-sans selection:bg-black selection:text-white">
-      
+
       <div className="print:hidden">
         {/* Top Navbar */}
         <Navbar

@@ -5,19 +5,23 @@
   :root {
     color-scheme: light;
   }
+
   html {
     scroll-behavior: smooth;
   }
+
   body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     background-color: #f5f5f0;
     color: #0a0a0a;
     -webkit-font-smoothing: antialiased;
   }
+
   .font-display {
     font-family: 'Anton', sans-serif;
     letter-spacing: -0.01em;
   }
+
   .font-mono {
     font-family: 'JetBrains Mono', monospace;
   }
@@ -39,13 +43,16 @@
   width: 6px;
   height: 6px;
 }
+
 .custom-scrollbar::-webkit-scrollbar-track {
   background: #e5e5e5;
 }
+
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background: #a3a3a3;
   border-radius: 9999px;
 }
+
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #737373;
 }
@@ -54,9 +61,27 @@
 .card-hover {
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 .card-hover:hover {
   transform: translateY(-3px);
-  box-shadow: 0 16px 40px -8px rgba(0,0,0,0.12);
+  box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.12);
+}
+
+/* Add to your global stylesheet (e.g. index.css) */
+.typed-cursor {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typed-cursor {
+    animation: none;
+  }
 }
 
 /* ─── Parallax Layer ────────────────────────────────────────────────────── */
@@ -68,7 +93,7 @@
 .reveal-init {
   opacity: 0;
   will-change: opacity, transform;
-  transition: 
+  transition:
     opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -118,13 +143,33 @@
 }
 
 /* Stagger Delays */
-.delay-75 { transition-delay: 75ms; }
-.delay-150 { transition-delay: 150ms; }
-.delay-225 { transition-delay: 225ms; }
-.delay-300 { transition-delay: 300ms; }
-.delay-375 { transition-delay: 375ms; }
-.delay-450 { transition-delay: 450ms; }
-.delay-600 { transition-delay: 600ms; }
+.delay-75 {
+  transition-delay: 75ms;
+}
+
+.delay-150 {
+  transition-delay: 150ms;
+}
+
+.delay-225 {
+  transition-delay: 225ms;
+}
+
+.delay-300 {
+  transition-delay: 300ms;
+}
+
+.delay-375 {
+  transition-delay: 375ms;
+}
+
+.delay-450 {
+  transition-delay: 450ms;
+}
+
+.delay-600 {
+  transition-delay: 600ms;
+}
 
 /* Legacy backward-compatibility class */
 .reveal-block {
@@ -169,44 +214,56 @@
     margin: 0;
     size: auto;
   }
+
   body {
     background-color: #ffffff !important;
     color: #000000 !important;
     margin: 0 !important;
     padding: 0 !important;
   }
+
   .print\:hidden {
     display: none !important;
   }
+
   .print\:block {
     display: block !important;
   }
+
   .print\:static {
     position: static !important;
   }
+
   .print\:p-0 {
     padding: 0 !important;
   }
+
   .print\:m-0 {
     margin: 0 !important;
   }
+
   .print\:max-h-none {
     max-height: none !important;
   }
+
   .print\:overflow-visible {
     overflow: visible !important;
   }
+
   canvas {
     display: none !important;
   }
+
   .print-paper-content {
     padding: 12mm 15mm !important;
   }
+
   .print-page-break-before {
     break-before: page !important;
     page-break-before: always !important;
     padding-top: 10mm !important;
   }
+
   .print-avoid-break {
     break-inside: avoid !important;
     page-break-inside: avoid !important;
@@ -215,6 +272,7 @@
 
 /* ─── Accessibility: reduced motion ────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
+
   .reveal-block,
   .reveal-init {
     opacity: 1 !important;

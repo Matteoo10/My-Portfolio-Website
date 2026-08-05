@@ -1,41 +1,38 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { workExperience, education } from '../data/resumeData';
-import { 
-  Briefcase, 
-  GraduationCap, 
-  Calendar, 
-  MapPin, 
-  CheckCircle2, 
-  BookOpen, 
-  Award, 
-  Sparkles 
+import {
+  Briefcase,
+  GraduationCap,
+  Calendar,
+  MapPin,
+  CheckCircle2,
+  BookOpen,
+  Award,
+  Sparkles
 } from 'lucide-react';
-import { useScrollReveal } from '../hooks/useScrollReveal';
 import { useMagneticHover } from '../hooks/useMagneticHover';
 import { useCinematicSection } from '../hooks/useCinematicScroll';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 // ── Sub-components to each get their own hooks ──────────────────────────────
 
 interface ExperienceCardProps {
   exp: typeof workExperience[number];
-  delay?: number;
 }
 
-const ExperienceCard: React.FC<ExperienceCardProps> = ({ exp, delay = 0 }) => {
-  const { ref: revealRef, isVisible } = useScrollReveal({ delay });
+const ExperienceCard: React.FC<ExperienceCardProps> = ({ exp }) => {
   const { ref: magRef, style: magStyle } = useMagneticHover(0.22);
-
-  // Merge both refs
-  const setRef = (el: HTMLDivElement | null) => {
-    (revealRef as React.MutableRefObject<HTMLElement | null>).current = el;
-    (magRef as React.MutableRefObject<HTMLElement | null>).current = el;
-  };
 
   return (
     <div
-      ref={setRef}
+      ref={magRef as React.RefObject<HTMLDivElement>}
       style={magStyle}
-      className={`magnetic-card glow-hover reveal-block ${isVisible ? 'is-visible' : ''} bg-[#f5f5f0] border border-[#d0d0c8] rounded-2xl p-6 relative`}
+      className="magnetic-card glow-hover bg-[#f5f5f0] border border-[#d0d0c8] rounded-2xl p-6 relative"
     >
       {/* Role Header */}
       <div className="flex flex-col sm:flex-row sm:items-start justify-between pb-4 border-b border-[#e0e0d8] gap-2">
@@ -87,19 +84,13 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({ exp, delay = 0 }) => {
 };
 
 const EducationCard: React.FC = () => {
-  const { ref: revealRef, isVisible } = useScrollReveal({ delay: 80 });
   const { ref: magRef, style: magStyle } = useMagneticHover(0.18);
-
-  const setRef = (el: HTMLDivElement | null) => {
-    (revealRef as React.MutableRefObject<HTMLElement | null>).current = el;
-    (magRef as React.MutableRefObject<HTMLElement | null>).current = el;
-  };
 
   return (
     <div
-      ref={setRef}
+      ref={magRef as React.RefObject<HTMLDivElement>}
       style={magStyle}
-      className={`magnetic-card glow-hover reveal-block ${isVisible ? 'is-visible' : ''} bg-[#f5f5f0] border border-[#d0d0c8] rounded-2xl p-6`}
+      className="magnetic-card glow-hover bg-[#f5f5f0] border border-[#d0d0c8] rounded-2xl p-6"
     >
       <div className="flex items-start justify-between pb-3 border-b border-[#e0e0d8] gap-3">
         <div>
@@ -156,19 +147,13 @@ const EducationCard: React.FC = () => {
 };
 
 const StrengthsCard: React.FC = () => {
-  const { ref: revealRef, isVisible } = useScrollReveal({ delay: 160 });
   const { ref: magRef, style: magStyle } = useMagneticHover(0.18);
-
-  const setRef = (el: HTMLDivElement | null) => {
-    (revealRef as React.MutableRefObject<HTMLElement | null>).current = el;
-    (magRef as React.MutableRefObject<HTMLElement | null>).current = el;
-  };
 
   return (
     <div
-      ref={setRef}
+      ref={magRef as React.RefObject<HTMLDivElement>}
       style={magStyle}
-      className={`magnetic-card glow-hover reveal-block ${isVisible ? 'is-visible' : ''} bg-[#f5f5f0] border border-[#d0d0c8] rounded-2xl p-5`}
+      className="magnetic-card glow-hover bg-[#f5f5f0] border border-[#d0d0c8] rounded-2xl p-5"
     >
       <h4 className="text-sm font-bold text-[#0a0a0a] flex items-center gap-2 mb-3">
         <Sparkles className="w-4 h-4" />
@@ -192,11 +177,57 @@ const StrengthsCard: React.FC = () => {
 
 export const ExperienceTimeline: React.FC = () => {
   const sectionRef = useCinematicSection<HTMLElement>({ triggerStart: 'top 80%' });
+  const railRef = useRef<HTMLDivElement | null>(null);
+  const railFillRef = useRef<HTMLDivElement | null>(null);
+  const dotRefs = useRef<(HTMLSpanElement | null)[]>([]);
+
+  // Scroll-drawn timeline line: the fill grows as you scroll through the
+  // work-experience list, and each marker lights up once scroll reaches it.
+  // Uses ScrollTrigger + scrub, same RAF-batched approach as the nav progress bar.
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!railRef.current || !railFillRef.current) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        railFillRef.current,
+        { scaleY: 0 },
+        {
+          scaleY: 1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: railRef.current,
+            start: 'top 70%',
+            end: 'bottom 70%',
+            scrub: 0.4,
+          },
+        }
+      );
+
+      dotRefs.current.forEach((dot) => {
+        if (!dot) return;
+        gsap.to(dot, {
+          backgroundColor: '#0a0a0a',
+          borderColor: '#0a0a0a',
+          scale: 1.15,
+          duration: 0.3,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: dot,
+            start: 'top 72%',
+            toggleActions: 'play none none reverse',
+          },
+        });
+      });
+    }, railRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section id="experience" ref={sectionRef} className="py-20 bg-white border-t border-[#e0e0d8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
         <div className="mb-14">
           <div data-gsap="heading" className="inline-flex items-center gap-2 text-xs font-medium text-[#525252] uppercase tracking-widest mb-3 px-3 py-1 rounded-full border border-[#d0d0c8] bg-[#f5f5f0]">
@@ -213,20 +244,41 @@ export const ExperienceTimeline: React.FC = () => {
 
         {/* Experience & Education Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
-          {/* Left Side: Work History (7 cols) */}
+
+          {/* Left Side: Work History (7 cols) — scroll-drawn timeline line */}
           <div className="lg:col-span-7 space-y-5">
             <h3 data-gsap="heading" className="text-sm font-semibold text-[#0a0a0a] uppercase tracking-widest flex items-center gap-2 pb-3 border-b border-[#e0e0d8]">
               <Briefcase className="w-4 h-4" />
               Professional IT Work Experience
             </h3>
 
-            <div className="space-y-5">
-              {workExperience.map((exp, i) => (
-                <div key={exp.id} data-gsap="card">
-                  <ExperienceCard exp={exp} delay={i * 80} />
-                </div>
-              ))}
+            <div ref={railRef} className="relative">
+              {/* Track (static) */}
+              <div className="absolute left-4 top-1 bottom-1 w-px bg-[#e0e0d8]" aria-hidden="true" />
+              {/* Fill (draws in as you scroll) */}
+              <div
+                ref={railFillRef}
+                className="absolute left-4 top-1 bottom-1 w-px bg-[#0a0a0a] origin-top"
+                style={{ transform: 'scaleY(0)' }}
+                aria-hidden="true"
+              />
+
+              <div className="space-y-5">
+                {workExperience.map((exp, i) => (
+                  <div key={exp.id} data-gsap="card" className="flex gap-4">
+                    <div className="w-8 flex justify-center pt-6 shrink-0">
+                      <span
+                        ref={(el) => { dotRefs.current[i] = el; }}
+                        className="w-3.5 h-3.5 rounded-full bg-[#f5f5f0] border-2 border-[#d0d0c8] relative z-10"
+                        aria-hidden="true"
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <ExperienceCard exp={exp} />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
