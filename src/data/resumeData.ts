@@ -341,6 +341,9 @@ export const projects: ProjectItem[] = [
     title: "ID Management System",
     status: "In Progress",
     category: "ID Management / Systems",
+    images: [
+      `${import.meta.env.BASE_URL}id-management.png`
+    ],
     description: "A web-based ID issuance and tracking platform that allows users to submit ID requests, monitor real-time processing status, and gives administrators full visibility over the entire ID lifecycle — from submission to release.",
     features: [
       "Self-service ID request portal with form validation and photo upload for employees or students",
