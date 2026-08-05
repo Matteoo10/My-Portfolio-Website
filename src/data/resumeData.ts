@@ -302,9 +302,9 @@ export const projects: ProjectItem[] = [
     status: "In Progress",
     category: "IT Support / Systems",
     images: [
-      `${import.meta.env.BASE_URL}omnitick-dashboard.png`,
       `${import.meta.env.BASE_URL}omnitick-landing.png`,
-      `${import.meta.env.BASE_URL}omnitick-form.png`
+      `${import.meta.env.BASE_URL}omnitick-form.png`,
+      `${import.meta.env.BASE_URL}omnitick-dashboard.png`
     ],
     description: "OmniTick is an enterprise web-based IT support portal and technician incident management system designed for logging, auto-prioritizing, queuing, tracking, and resolving IT service requests across organizations.",
     features: [
