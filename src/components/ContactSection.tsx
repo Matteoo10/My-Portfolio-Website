@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { personalInfo } from '../data/resumeData';
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Send, 
-  CheckCircle2, 
-  Github, 
-  Linkedin, 
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+  CheckCircle2,
+  Github,
+  Linkedin,
   MessageSquare,
   Sparkles
 } from 'lucide-react';
@@ -43,7 +43,7 @@ export const ContactSection: React.FC = () => {
   return (
     <section id="contact" ref={sectionRef} className="py-20 bg-[#f5f5f0] border-t border-[#e0e0d8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
         <div className="mb-14">
           <div data-gsap="heading" className="inline-flex items-center gap-2 text-xs font-medium text-[#525252] uppercase tracking-widest mb-3 px-3 py-1 rounded-full border border-[#d0d0c8] bg-white/60">
@@ -59,12 +59,12 @@ export const ContactSection: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
+
           {/* Left Side: Contact Info */}
           <div className="lg:col-span-5 space-y-4">
-            
+
             {/* Direct Email */}
-            <a 
+            <a
               href={`mailto:${personalInfo.email}`}
               data-gsap="card"
               className="glow-hover p-5 rounded-2xl bg-white border border-[#d0d0c8] flex items-start gap-4 group block hover:-translate-y-1 hover:shadow-md transition-all duration-300"
@@ -82,7 +82,7 @@ export const ContactSection: React.FC = () => {
             </a>
 
             {/* Phone */}
-            <a 
+            <a
               href={`tel:${personalInfo.phone}`}
               data-gsap="card"
               className="glow-hover p-5 rounded-2xl bg-white border border-[#d0d0c8] flex items-start gap-4 group block hover:-translate-y-1 hover:shadow-md transition-all duration-300"
@@ -148,7 +148,7 @@ export const ContactSection: React.FC = () => {
             data-gsap="card"
             className="lg:col-span-7 bg-white border border-[#d0d0c8] rounded-2xl p-6 sm:p-8 shadow-sm"
           >
-            
+
             {isSent ? (
               <div className="text-center py-12 space-y-4">
                 <div className="w-16 h-16 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center mx-auto text-emerald-600">
@@ -242,7 +242,7 @@ export const ContactSection: React.FC = () => {
       </div>
 
       {/* Footer */}
-      <div className="mt-20 border-t border-[#e0e0d8] pt-8 text-center">
+      <div className="mt-10 border-t border-[#e0e0d8] pt-8 text-center">
         <p className="text-xs text-[#a0a098] font-mono">
           © {new Date().getFullYear()} Christian Matthew P. Dator — IT Support Specialist &amp; Junior IT Analyst
         </p>

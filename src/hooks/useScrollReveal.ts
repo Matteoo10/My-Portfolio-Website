@@ -23,7 +23,7 @@ export interface ScrollRevealOptions {
  * Once visible, stays visible permanently (fire once per element).
  */
 export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(options: ScrollRevealOptions = {}) {
-  const { threshold = 0.15, delay = 0, rootMargin = '0px 0px -40px 0px', variant = 'fade-up' } = options;
+  const { threshold = 0.05, delay = 0, rootMargin = '0px 0px -20px 0px', variant = 'fade-up' } = options;
   const ref = useRef<T | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 

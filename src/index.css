@@ -5,6 +5,9 @@
   :root {
     color-scheme: light;
   }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     background-color: #f5f5f0;
@@ -49,11 +52,11 @@
 
 /* Smooth hover lift */
 .card-hover {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .card-hover:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px -8px rgba(0,0,0,0.12);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px -8px rgba(0,0,0,0.12);
 }
 
 /* ─── Parallax Layer ────────────────────────────────────────────────────── */
@@ -61,51 +64,51 @@
   will-change: transform;
 }
 
-/* ─── Scroll Reveal Animation System ──────────────────────────────────── */
+/* ─── Scroll Reveal Animation System (Ultra-Smooth Apple Style Easing) ──── */
 .reveal-init {
   opacity: 0;
   will-change: opacity, transform;
   transition: 
-    opacity 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    box-shadow 0.4s ease;
+    opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Element-Specific Animation Variants */
 .reveal-heading {
-  transform: translateY(50px) scale(0.95);
+  transform: translateY(28px) scale(0.98);
 }
 
 .reveal-text {
-  transform: translateY(25px);
+  transform: translateY(18px);
 }
 
 .reveal-profile-pic {
-  transform: translateY(25px) scale(0.85);
+  transform: translateY(20px) scale(0.92);
 }
 
 .reveal-card-rotate {
-  transform: translateY(30px) scale(0.95) rotate(-1.5deg);
+  transform: translateY(20px) scale(0.98);
 }
 
 .reveal-variant-fade-up {
-  transform: translateY(30px) scale(0.95);
+  transform: translateY(24px) scale(0.98);
 }
 
 .reveal-variant-fade-down {
-  transform: translateY(-30px) scale(0.95);
+  transform: translateY(-24px) scale(0.98);
 }
 
 .reveal-variant-fade-left {
-  transform: translateX(36px);
+  transform: translateX(28px);
 }
 
 .reveal-variant-fade-right {
-  transform: translateX(-36px);
+  transform: translateX(-28px);
 }
 
 .reveal-variant-scale {
-  transform: scale(0.85);
+  transform: scale(0.92);
 }
 
 /* Revealed Active State */
@@ -126,10 +129,10 @@
 /* Legacy backward-compatibility class */
 .reveal-block {
   opacity: 0;
-  transform: scale(0.96) translateY(20px);
+  transform: scale(0.98) translateY(18px);
   transition:
-    opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-block.is-visible {
@@ -141,23 +144,23 @@
 .magnetic-card,
 .magnetic-btn {
   will-change: transform;
-  /* individual transition handled inline via hook style */
 }
 
-/* ─── Glow Hover (instant on mouse-over) ───────────────────────────────── */
+/* ─── Glow Hover (instant on mouse-over, smooth release) ─────────────────── */
 .glow-hover {
   border-color: #d0d0c8;
   box-shadow: none;
   transition:
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.25s ease;
 }
 
 .glow-hover:hover {
   border-color: #0a0a0a;
   box-shadow:
     0 0 0 3px rgba(10, 10, 10, 0.06),
-    0 8px 28px -6px rgba(10, 10, 10, 0.14);
+    0 12px 32px -6px rgba(10, 10, 10, 0.12);
 }
 
 /* ─── Print Styles ────────────────────────────────────────────────────────── */

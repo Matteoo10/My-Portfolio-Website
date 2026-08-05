@@ -52,59 +52,57 @@ export function useCinematicSection<T extends HTMLElement = HTMLDivElement>(
         },
       });
 
-      // Step 1: Headings (Scale 0.95 -> 1.0, Fade-in, Slide Up 50px)
+      // Step 1: Headings (Scale 0.98 -> 1.0, Fade-in, Slide Up 28px)
       if (headings.length > 0) {
         tl.fromTo(
           headings,
-          { opacity: 0, y: 50, scale: 0.95 },
+          { opacity: 0, y: 28, scale: 0.98 },
           {
             opacity: 1,
             y: 0,
             scale: 1,
-            duration: 0.85,
-            ease: 'power3.out',
-            stagger: 0.12,
+            duration: 0.9,
+            ease: 'power4.out',
+            stagger: 0.1,
           }
         );
       }
 
-      // Step 2: Description text (Fade-in, Slide Up 25px)
+      // Step 2: Description text (Fade-in, Slide Up 18px)
       if (descriptions.length > 0) {
         tl.fromTo(
           descriptions,
-          { opacity: 0, y: 25 },
+          { opacity: 0, y: 18 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.7,
-            ease: 'power2.out',
-            stagger: 0.1,
+            duration: 0.8,
+            ease: 'power3.out',
+            stagger: 0.08,
           },
-          '-=0.5' // Overlap slightly with heading reveal
+          '-=0.6'
         );
       }
 
-      // Step 3: Cards & Items (Scale 0.95 -> 1.0, Slide Up 30px, Subtle rotation -1.5deg -> 0, Stagger 120ms)
+      // Step 3: Cards & Items (Scale 0.98 -> 1.0, Slide Up 22px, Stagger 100ms)
       if (cards.length > 0) {
         tl.fromTo(
           cards,
           {
             opacity: 0,
-            y: 30,
-            scale: 0.95,
-            rotate: -1.2,
+            y: 22,
+            scale: 0.98,
           },
           {
             opacity: 1,
             y: 0,
             scale: 1,
-            rotate: 0,
-            duration: 0.8,
-            ease: 'power3.out',
+            duration: 0.85,
+            ease: 'power4.out',
             stagger: staggerStep,
             clearProps: 'transform,opacity',
           },
-          '-=0.4'
+          '-=0.5'
         );
       }
     }, containerRef);
