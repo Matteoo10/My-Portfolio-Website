@@ -324,9 +324,6 @@ export const projects: ProjectItem[] = [
     title: "School Cafeteria Web Portal (Capstone)",
     status: "Completed",
     category: "Web Development",
-    images: [
-      `${import.meta.env.BASE_URL}cafeteria.png`
-    ],
     description: "Academic Capstone Project built for Universidad de Manila to streamline food ordering, inventory monitoring, and cafeteria operations.",
     features: [
       "Dynamic menu item catalog with stock availability indicators",
@@ -344,9 +341,6 @@ export const projects: ProjectItem[] = [
     title: "ID Management System",
     status: "In Progress",
     category: "ID Management / Systems",
-    images: [
-      `${import.meta.env.BASE_URL}id-management.png`
-    ],
     description: "A web-based ID issuance and tracking platform that allows users to submit ID requests, monitor real-time processing status, and gives administrators full visibility over the entire ID lifecycle — from submission to release.",
     features: [
       "Self-service ID request portal with form validation and photo upload for employees or students",
