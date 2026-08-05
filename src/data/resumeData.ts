@@ -30,7 +30,9 @@ export const workExperience: WorkExperience[] = [
       "Manage and document support tickets, incident reports, troubleshooting steps, and resolutions in ticketing workflow.",
       "Assist in incident management by prioritizing issues, escalating unresolved cases, and coordinating with IT staff or vendors.",
       "Monitor IT systems and network devices to support continuous operations and 24/7 support requirements.",
-      "Maintain user accounts, network documentation, preventive maintenance records, and IT equipment inventory."
+      "Maintain user accounts, network documentation, preventive maintenance records, and IT equipment inventory.",
+      "Developing an IT Ticketing System to streamline the tracking, management, and documentation of IT support requests and their resolutions across the organization.",
+      "Developing an ID Management System that enables users to submit ID requests, track real-time processing status, and manage the issuance of identification cards."
     ]
   },
   {
@@ -169,76 +171,6 @@ export const initialTickets: Ticket[] = [
       "Unlock-ADAccount -Identity m_santos"
     ],
     resolutionNotes: "Account unlocked, temporary password issued, Remote Desktop permissions verified, and password reset successfully forced upon first login."
-  }
-];
-
-export const networkNodes: NetworkNode[] = [
-  {
-    id: "usg-gateway",
-    name: "Ubiquiti Security Gateway Pro",
-    type: "gateway",
-    ip: "192.168.1.1",
-    subnet: "255.255.255.0",
-    vlan: "VLAN 1 (Native)",
-    vlanName: "Management Network",
-    status: "Online",
-    model: "USG-PRO-4 Dual-WAN Gateway",
-    details: "Core edge router providing WAN load balancing, DPI packet inspection, and central firewall routing between VLANs.",
-    firewallRules: [
-      "Rule 2001: Drop Guest (VLAN 40) -> Corporate (VLAN 10/20)",
-      "Rule 2002: Allow Established & Related Connections",
-      "Rule 2003: Enable Smart Queues (FQ_CODEL) for WAN Traffic"
-    ]
-  },
-  {
-    id: "unifi-switch-24",
-    name: "UniFi Switch 24 POE+ (250W)",
-    type: "switch",
-    ip: "192.168.1.10",
-    subnet: "255.255.255.0",
-    vlan: "Trunk (All VLANs)",
-    vlanName: "Core Switching",
-    status: "Online",
-    model: "US-24-250W Managed Switch",
-    details: "Central PoE switch supplying power and VLAN tagging to access points, IP cameras, and terminal workstations.",
-    bandwidthCap: "1 Gbps Full Duplex Uplink"
-  },
-  {
-    id: "ap-terminal-3",
-    name: "UniFi AP AC Pro - Terminal 3",
-    type: "ap",
-    ip: "192.168.10.45",
-    subnet: "255.255.255.0",
-    vlan: "VLAN 20 / VLAN 40 Tagged",
-    vlanName: "Operations & Guest Wireless",
-    status: "Online",
-    model: "UAP-AC-PRO (Dual Band)",
-    details: "High-density access point serving ticketing devices, mobile dispatch scanners, and public guest Wi-Fi.",
-    bandwidthCap: "Per-user Guest Cap: 5Mbps DL / 2Mbps UL"
-  },
-  {
-    id: "wks-ticketing-01",
-    name: "Ticketing POS Workstation #1",
-    type: "workstation",
-    ip: "192.168.20.101",
-    subnet: "255.255.255.0",
-    vlan: "VLAN 20",
-    vlanName: "Bus Ticketing & Dispatch",
-    status: "Online",
-    model: "Dell OptiPlex 3080 Desktop",
-    details: "Dedicated counter terminal running custom ticketing software and connected to thermal receipt printer."
-  },
-  {
-    id: "printer-thermal-02",
-    name: "Network Ticket Printer - Counter 2",
-    type: "printer",
-    ip: "192.168.20.202",
-    subnet: "255.255.255.0",
-    vlan: "VLAN 20",
-    vlanName: "Bus Ticketing & Dispatch",
-    status: "Online",
-    model: "Epson TM-T88VI Network Thermal Printer",
-    details: "High-speed thermal receipt printer for passenger ticketing with fixed static IP binding."
   }
 ];
 

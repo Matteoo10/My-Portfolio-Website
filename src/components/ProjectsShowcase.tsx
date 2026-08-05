@@ -17,7 +17,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenLightbox }) =>
   return (
     <div
       data-gsap="card"
-      className="glow-hover bg-[#f5f5f0] border border-[#d0d0c8] rounded-2xl flex flex-col justify-between hover:-translate-y-1 hover:shadow-xl hover:border-[#0a0a0a] transition-all duration-300 overflow-hidden"
+      className="glow-hover bg-[#f5f5f0] border border-[#d0d0c8] rounded-2xl flex flex-col justify-start hover:-translate-y-1 hover:shadow-xl hover:border-[#0a0a0a] transition-all duration-300 overflow-hidden"
     >
       <div>
         {/* Project Screenshot Gallery Showcase */}
@@ -76,9 +76,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenLightbox }) =>
           </div>
         ) : null}
 
-        <div className="p-6">
+        <div className="p-5 sm:p-6">
           {/* Header Badges */}
-          <div className="flex items-center justify-between pb-3 border-b border-[#e0e0d8] mb-4">
+          <div className="flex items-center justify-between pb-3 border-b border-[#e0e0d8] mb-3">
             <div className="flex items-center gap-2 flex-wrap">
               <span className="px-2.5 py-0.5 rounded-full text-xs font-mono font-semibold bg-[#0a0a0a] text-white">
                 {project.category}
@@ -95,10 +95,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenLightbox }) =>
 
           <h3 className="text-xl font-bold text-[#0a0a0a] mb-2">{project.title}</h3>
 
-          <p className="text-sm text-[#525252] mb-4 leading-relaxed">{project.description}</p>
+          <p className="text-sm text-[#525252] mb-3.5 leading-relaxed">{project.description}</p>
 
-          <div className="space-y-1.5 mb-5">
-            <h5 className="text-xs font-semibold text-[#737373] uppercase tracking-widest mb-2">
+          <div className="space-y-1.5">
+            <h5 className="text-xs font-semibold text-[#737373] uppercase tracking-widest mb-1.5">
               Key Capabilities
             </h5>
             {project.features.map((feat, i) => (
@@ -111,7 +111,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenLightbox }) =>
         </div>
       </div>
 
-      <div className="p-6 pt-0">
+      <div className="px-5 pb-5 sm:px-6 sm:pb-6 pt-0 mt-auto">
         <div className="pt-4 border-t border-[#e0e0d8]">
           <div className="flex flex-wrap gap-1.5 mb-2">
             {project.techStack.map((tech, i) => (
@@ -198,7 +198,7 @@ export const ProjectsShowcase: React.FC = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
           {projects.map((project) => (
             <ProjectCard
               key={project.id}
