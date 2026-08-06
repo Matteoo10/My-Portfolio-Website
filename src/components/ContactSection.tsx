@@ -22,7 +22,6 @@ export const ContactSection: React.FC = () => {
   const [isSent, setIsSent] = useState(false);
   const [ticketRef, setTicketRef] = useState('');
 
-  // GSAP Section hook
   const sectionRef = useCinematicSection<HTMLElement>({ triggerStart: 'top 80%', staggerStep: 0.1 });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -44,7 +43,6 @@ export const ContactSection: React.FC = () => {
     <section id="contact" ref={sectionRef} className="py-20 bg-[#f5f5f0] border-t border-[#e0e0d8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Section Header */}
         <div className="mb-14">
           <div data-gsap="heading" className="inline-flex items-center gap-2 text-xs font-medium text-[#525252] uppercase tracking-widest mb-3 px-3 py-1 rounded-full border border-[#d0d0c8] bg-white/60">
             <MessageSquare className="w-3.5 h-3.5" />
@@ -60,10 +58,8 @@ export const ContactSection: React.FC = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
-          {/* Left Side: Contact Info */}
           <div className="lg:col-span-5 space-y-4">
 
-            {/* Direct Email */}
             <a
               href={`mailto:${personalInfo.email}`}
               data-gsap="card"
@@ -81,7 +77,6 @@ export const ContactSection: React.FC = () => {
               </div>
             </a>
 
-            {/* Phone */}
             <a
               href={`tel:${personalInfo.phone}`}
               data-gsap="card"
@@ -99,7 +94,6 @@ export const ContactSection: React.FC = () => {
               </div>
             </a>
 
-            {/* Location */}
             <div data-gsap="card" className="p-5 rounded-2xl bg-white border border-[#e0e0d8] flex items-start gap-4">
               <div className="p-3 rounded-xl bg-[#f5f5f0] border border-[#e0e0d8]">
                 <MapPin className="w-5 h-5 text-[#525252]" />
@@ -111,7 +105,6 @@ export const ContactSection: React.FC = () => {
               </div>
             </div>
 
-            {/* Social Links */}
             <div data-gsap="card" className="flex gap-3">
               <a
                 href={personalInfo.github}
@@ -133,7 +126,6 @@ export const ContactSection: React.FC = () => {
               </a>
             </div>
 
-            {/* Availability badge */}
             <div data-gsap="card" className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 flex items-center gap-3">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0 animate-pulse" />
               <div>
@@ -143,7 +135,6 @@ export const ContactSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Side: Contact Form */}
           <div
             data-gsap="card"
             className="lg:col-span-7 bg-white border border-[#d0d0c8] rounded-2xl p-6 sm:p-8 shadow-sm"
@@ -241,7 +232,6 @@ export const ContactSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Footer */}
       <div className="mt-10 border-t border-[#e0e0d8] pt-8 text-center">
         <p className="text-xs text-[#a0a098] font-mono">
           © {new Date().getFullYear()} Christian Matthew P. Dator — IT Support Specialist &amp; Junior IT Analyst
@@ -250,3 +240,4 @@ export const ContactSection: React.FC = () => {
     </section>
   );
 };
+

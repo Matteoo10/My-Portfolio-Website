@@ -19,8 +19,6 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-// ── Sub-components to each get their own hooks ──────────────────────────────
-
 interface ExperienceCardProps {
   exp: typeof workExperience[number];
 }
@@ -34,7 +32,6 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({ exp }) => {
       style={magStyle}
       className="magnetic-card glow-hover bg-[#f5f5f0] border border-[#d0d0c8] rounded-2xl p-6 relative"
     >
-      {/* Role Header */}
       <div className="flex flex-col sm:flex-row sm:items-start justify-between pb-4 border-b border-[#e0e0d8] gap-2">
         <div>
           <div className="flex items-center gap-2 flex-wrap">
@@ -58,7 +55,6 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({ exp }) => {
         </div>
       </div>
 
-      {/* Bullet points */}
       <div className="my-4 space-y-2 text-sm text-[#373737]">
         {exp.description.map((bullet, idx) => (
           <div key={idx} className="flex items-start gap-2.5">
@@ -68,7 +64,6 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({ exp }) => {
         ))}
       </div>
 
-      {/* Skill Badges */}
       <div className="pt-3 border-t border-[#e0e0d8] flex flex-wrap gap-1.5">
         {exp.tags.map((tag, i) => (
           <span
@@ -105,7 +100,6 @@ const EducationCard: React.FC = () => {
         </span>
       </div>
 
-      {/* Relevant Subjects */}
       <div className="my-4">
         <h5 className="text-xs font-semibold text-[#737373] uppercase tracking-widest mb-2 flex items-center gap-1.5">
           <BookOpen className="w-3.5 h-3.5" />
@@ -123,7 +117,6 @@ const EducationCard: React.FC = () => {
         </div>
       </div>
 
-      {/* Capstone */}
       <div className="mt-4 p-4 rounded-xl bg-white border border-[#e0e0d8]">
         <div className="flex items-center gap-2 text-[#0a0a0a] font-bold text-xs uppercase tracking-wider mb-1">
           <Award className="w-4 h-4" />
@@ -173,17 +166,12 @@ const StrengthsCard: React.FC = () => {
   );
 };
 
-// ── Main Section ─────────────────────────────────────────────────────────────
-
 export const ExperienceTimeline: React.FC = () => {
   const sectionRef = useCinematicSection<HTMLElement>({ triggerStart: 'top 80%' });
   const railRef = useRef<HTMLDivElement | null>(null);
   const railFillRef = useRef<HTMLDivElement | null>(null);
   const dotRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
-  // Scroll-drawn timeline line: the fill grows as you scroll through the
-  // work-experience list, and each marker lights up once scroll reaches it.
-  // Uses ScrollTrigger + scrub, same RAF-batched approach as the nav progress bar.
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     if (!railRef.current || !railFillRef.current) return;
@@ -228,7 +216,6 @@ export const ExperienceTimeline: React.FC = () => {
     <section id="experience" ref={sectionRef} className="py-20 bg-white border-t border-[#e0e0d8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Section Header */}
         <div className="mb-14">
           <div data-gsap="heading" className="inline-flex items-center gap-2 text-xs font-medium text-[#525252] uppercase tracking-widest mb-3 px-3 py-1 rounded-full border border-[#d0d0c8] bg-[#f5f5f0]">
             <Briefcase className="w-3.5 h-3.5" />
@@ -242,10 +229,8 @@ export const ExperienceTimeline: React.FC = () => {
           </p>
         </div>
 
-        {/* Experience & Education Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
-          {/* Left Side: Work History (7 cols) — scroll-drawn timeline line */}
           <div className="lg:col-span-7 space-y-5">
             <h3 data-gsap="heading" className="text-sm font-semibold text-[#0a0a0a] uppercase tracking-widest flex items-center gap-2 pb-3 border-b border-[#e0e0d8]">
               <Briefcase className="w-4 h-4" />
@@ -253,9 +238,7 @@ export const ExperienceTimeline: React.FC = () => {
             </h3>
 
             <div ref={railRef} className="relative">
-              {/* Track (static) */}
               <div className="absolute left-4 top-1 bottom-1 w-px bg-[#e0e0d8]" aria-hidden="true" />
-              {/* Fill (draws in as you scroll) */}
               <div
                 ref={railFillRef}
                 className="absolute left-4 top-1 bottom-1 w-px bg-[#0a0a0a] origin-top"
@@ -282,7 +265,6 @@ export const ExperienceTimeline: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Side: Education (5 cols) */}
           <div className="lg:col-span-5 space-y-5">
             <h3 data-gsap="heading" className="text-sm font-semibold text-[#0a0a0a] uppercase tracking-widest flex items-center gap-2 pb-3 border-b border-[#e0e0d8]">
               <GraduationCap className="w-4 h-4" />
@@ -302,3 +284,4 @@ export const ExperienceTimeline: React.FC = () => {
     </section>
   );
 };
+

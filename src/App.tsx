@@ -10,7 +10,6 @@ export default function App() {
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
 
-  // Track active section on scroll
   useEffect(() => {
     const sections = ['hero', 'experience', 'projects', 'contact'];
     const els = sections
@@ -55,29 +54,23 @@ export default function App() {
     <div className="min-h-screen bg-[#f5f5f0] text-[#0a0a0a] font-sans selection:bg-black selection:text-white">
 
       <div className="print:hidden">
-        {/* Top Navbar */}
         <Navbar
           onOpenResume={() => setIsResumeModalOpen(true)}
           activeSection={activeSection}
           setActiveSection={setActiveSection}
         />
 
-        {/* Hero Header */}
         <Hero
           onOpenResume={() => setIsResumeModalOpen(true)}
         />
 
-        {/* Work Experience & Education Timeline */}
         <ExperienceTimeline />
 
-        {/* Projects Showcase & Wireframe Demos */}
         <ProjectsShowcase />
 
-        {/* Contact & Direct Dispatch */}
         <ContactSection />
       </div>
 
-      {/* Printable/Downloadable Resume Modal */}
       <ResumeModal
         isOpen={isResumeModalOpen}
         onClose={() => setIsResumeModalOpen(false)}
@@ -86,3 +79,4 @@ export default function App() {
     </div>
   );
 }
+

@@ -9,14 +9,8 @@ interface HeroProps {
   onOpenResume: () => void;
 }
 
-// The line typed out in the terminal-style accent under the description.
-// Swap this for whatever line you want — keep it short, it reads better typed.
 const TYPED_LINE = 'status: available for new roles_';
 
-/**
- * Types out `text` one character at a time on mount.
- * Respects prefers-reduced-motion by rendering the full text immediately.
- */
 function useTypewriter(text: string, speed = 32, startDelay = 700) {
   const [displayed, setDisplayed] = useState('');
   const [done, setDone] = useState(false);
@@ -54,16 +48,12 @@ function useTypewriter(text: string, speed = 32, startDelay = 700) {
 export const Hero: React.FC<HeroProps> = () => {
   const [userPhoto] = useState<string>(personalInfo.profileImage);
 
-  // Section GSAP timeline hook
   const heroContainerRef = useCinematicSection<HTMLDivElement>({ triggerStart: 'top 95%' });
   const portraitContainerRef = useCinematicPortraitReveal<HTMLDivElement>();
 
-  // Parallax: display name drifts slowest (background layer)
   const { style: bgNameStyle } = useParallax(0.4);
-  // Parallax: GSAP scrubbed portrait drift
   const portraitRef = useCinematicParallax<HTMLImageElement>(-12);
 
-  // Refs for the two words in the big background name — animated in on mount
   const wordRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
   const { displayed: typedLine, done: typedDone } = useTypewriter(TYPED_LINE);
@@ -73,7 +63,6 @@ export const Hero: React.FC<HeroProps> = () => {
     const words = wordRefs.current.filter((el): el is HTMLSpanElement => el !== null);
     if (prefersReducedMotion || words.length === 0) return;
 
-    // Scoped + auto-cleaned up on unmount — won't leak into other GSAP timelines
     const ctx = gsap.context(() => {
       gsap.fromTo(
         words,
@@ -106,7 +95,6 @@ export const Hero: React.FC<HeroProps> = () => {
   return (
     <section id="hero" ref={heroContainerRef} className="relative bg-[#f5f5f0] overflow-hidden" style={{ isolation: 'isolate', minHeight: 'calc(100vh - 64px)' }}>
 
-      {/* ── Large Display Name Behind Everything (parallax background layer) ── */}
       <div
         className="absolute inset-x-0 top-0 flex items-start justify-center pointer-events-none select-none overflow-hidden parallax-bg"
         aria-hidden="true"
@@ -116,7 +104,6 @@ export const Hero: React.FC<HeroProps> = () => {
           className="font-display leading-none tracking-tight whitespace-nowrap"
           style={{ fontSize: 'clamp(4rem, 11.5vw, 11.5rem)', lineHeight: 0.88 }}
         >
-          {/* Each word sits in an overflow-hidden mask so it can rise up into view on load */}
           <span className="inline-block overflow-hidden align-bottom">
             <span
               ref={(el) => { wordRefs.current[0] = el; }}
@@ -136,11 +123,9 @@ export const Hero: React.FC<HeroProps> = () => {
         </span>
       </div>
 
-      {/* ── Content Grid ── */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full" style={{ minHeight: 'calc(100vh - 64px)' }}>
         <div className="grid grid-cols-12 gap-4 h-full items-end pt-8">
 
-          {/* Left: Title & Bio (3 cols) */}
           <div className="col-span-12 lg:col-span-3 space-y-6 lg:self-center pb-8 lg:pb-12">
             <div data-gsap="heading">
               <p className="text-sm font-semibold text-[#0a0a0a] uppercase tracking-widest mb-1">
@@ -150,14 +135,12 @@ export const Hero: React.FC<HeroProps> = () => {
                 Designing stable, secure IT environments — from network configuration to user support and web development.
               </p>
 
-              {/* Terminal-style typed accent line */}
               <p className="font-mono text-xs text-[#0a0a0a]/60 mt-3 tracking-tight">
                 <span aria-hidden="true">{'> '}</span>
                 <span aria-hidden="true">{typedLine}</span>
                 {!typedDone && (
                   <span aria-hidden="true" className="typed-cursor">_</span>
                 )}
-                {/* Full line for screen readers, delivered immediately rather than character-by-character */}
                 <span className="sr-only">{TYPED_LINE}</span>
               </p>
             </div>
@@ -173,7 +156,6 @@ export const Hero: React.FC<HeroProps> = () => {
             </div>
           </div>
 
-          {/* Center: Portrait (6 cols) — GSAP scrubbed parallax & reveal */}
           <div ref={portraitContainerRef} className="col-span-12 lg:col-span-6 relative flex justify-center items-end" style={{ minHeight: 'calc(100vh - 64px)' }}>
 
             <div
@@ -198,7 +180,6 @@ export const Hero: React.FC<HeroProps> = () => {
             </div>
           </div>
 
-          {/* Right: Social Links (3 cols) */}
           <div className="col-span-12 lg:col-span-3 flex flex-row lg:flex-col justify-center lg:justify-start gap-3 lg:self-center pb-8 lg:pb-12">
             {socialLinks.map(({ label, href, Icon }) => (
               <a
@@ -218,8 +199,8 @@ export const Hero: React.FC<HeroProps> = () => {
         </div>
       </div>
 
-      {/* Subtle bottom divider line */}
       <div className="absolute bottom-0 inset-x-0 h-px bg-[#e0e0d8]" />
     </section>
   );
 };
+

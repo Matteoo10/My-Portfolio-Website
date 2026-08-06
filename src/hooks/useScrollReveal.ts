@@ -13,22 +13,17 @@ export type RevealVariant =
 
 export interface ScrollRevealOptions {
   threshold?: number;
-  delay?: number; // ms — used for staggered reveals
+  delay?: number;
   rootMargin?: string;
   variant?: RevealVariant;
 }
 
-/**
- * useScrollReveal — returns isVisible once element crosses the viewport threshold (0.15).
- * Once visible, stays visible permanently (fire once per element).
- */
 export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(options: ScrollRevealOptions = {}) {
   const { threshold = 0.05, delay = 0, rootMargin = '0px 0px -20px 0px', variant = 'fade-up' } = options;
   const ref = useRef<T | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Respect prefers-reduced-motion: immediately visible
     const query = window.matchMedia('(prefers-reduced-motion: reduce)');
     if (query.matches) {
       setIsVisible(true);
@@ -38,7 +33,6 @@ export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(options:
     const el = ref.current;
     if (!el) return;
 
-    // Initial check: if element is already within the top viewport on load, reveal immediately
     const rect = el.getBoundingClientRect();
     if (rect.top < window.innerHeight && rect.bottom > 0) {
       setIsVisible(true);
@@ -55,7 +49,7 @@ export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(options:
           } else {
             setIsVisible(true);
           }
-          observer.unobserve(el); // fire once
+          observer.unobserve(el);
         }
       },
       { threshold, rootMargin }
@@ -73,4 +67,5 @@ export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(options:
 
   return { ref, isVisible, className };
 }
+
 

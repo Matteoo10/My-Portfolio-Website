@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-// Register ScrollTrigger plugin safely
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
@@ -13,12 +12,6 @@ export interface CinematicSectionOptions {
   toggleActions?: string;
 }
 
-/**
- * useCinematicSection — creates a GSAP ScrollTrigger timeline that sequentially animates:
- * 1. Section Header & Badge ([data-gsap="heading"])
- * 2. Description text ([data-gsap="description"])
- * 3. Cards & Buttons ([data-gsap="card"], [data-gsap="item"])
- */
 export function useCinematicSection<T extends HTMLElement = HTMLDivElement>(
   options: CinematicSectionOptions = {}
 ) {
@@ -29,7 +22,6 @@ export function useCinematicSection<T extends HTMLElement = HTMLDivElement>(
   } = options;
 
   useEffect(() => {
-    // Respect prefers-reduced-motion
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       return;
     }
@@ -38,7 +30,6 @@ export function useCinematicSection<T extends HTMLElement = HTMLDivElement>(
     if (!container) return;
 
     const ctx = gsap.context(() => {
-      // Find targets inside container
       const headings = container.querySelectorAll('[data-gsap="heading"]');
       const descriptions = container.querySelectorAll('[data-gsap="description"]');
       const cards = container.querySelectorAll('[data-gsap="card"], [data-gsap="item"]');
@@ -52,7 +43,6 @@ export function useCinematicSection<T extends HTMLElement = HTMLDivElement>(
         },
       });
 
-      // Step 1: Headings (Scale 0.98 -> 1.0, Fade-in, Slide Up 28px)
       if (headings.length > 0) {
         tl.fromTo(
           headings,
@@ -68,7 +58,6 @@ export function useCinematicSection<T extends HTMLElement = HTMLDivElement>(
         );
       }
 
-      // Step 2: Description text (Fade-in, Slide Up 18px)
       if (descriptions.length > 0) {
         tl.fromTo(
           descriptions,
@@ -84,7 +73,6 @@ export function useCinematicSection<T extends HTMLElement = HTMLDivElement>(
         );
       }
 
-      // Step 3: Cards & Items (Scale 0.98 -> 1.0, Slide Up 22px, Stagger 100ms)
       if (cards.length > 0) {
         tl.fromTo(
           cards,
@@ -108,16 +96,13 @@ export function useCinematicSection<T extends HTMLElement = HTMLDivElement>(
     }, containerRef);
 
     return () => {
-      ctx.revert(); // Clean up GSAP context on unmount
+      ctx.revert();
     };
   }, [triggerStart, staggerStep]);
 
   return containerRef;
 }
 
-/**
- * useCinematicParallax — applies smooth scrubbed GSAP parallax to an element.
- */
 export function useCinematicParallax<T extends HTMLElement = HTMLDivElement>(
   yPercent: number = -15
 ) {
@@ -152,13 +137,6 @@ export function useCinematicParallax<T extends HTMLElement = HTMLDivElement>(
   return ref;
 }
 
-/**
- * useCinematicPortraitReveal — animates profile photo reveal:
- * - Fade in opacity (0 to 1)
- * - Scale up from 0.85 -> 1.0
- * - Duration ~0.75s with power3.out ease-out curve
- * - Simultaneous soft glow reveal
- */
 export function useCinematicPortraitReveal<T extends HTMLElement = HTMLDivElement>() {
   const containerRef = useRef<T | null>(null);
 
@@ -182,7 +160,6 @@ export function useCinematicPortraitReveal<T extends HTMLElement = HTMLDivElemen
         },
       });
 
-      // Profile Image reveal (opacity 0 -> 1, scale 0.85 -> 1.0, 0.75s ease-out)
       if (img) {
         tl.fromTo(
           img,
@@ -199,4 +176,5 @@ export function useCinematicPortraitReveal<T extends HTMLElement = HTMLDivElemen
 
   return containerRef;
 }
+
 

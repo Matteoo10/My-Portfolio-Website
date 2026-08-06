@@ -20,7 +20,6 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
 
   const websiteUrl = "https://matteoo10.github.io/My-Portfolio-Website/";
 
-  // Close on Escape
   useEffect(() => {
     if (!isOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -128,7 +127,6 @@ School Cafeteria Web Portal | Capstone
             className="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl relative print:bg-white print:border-none print:shadow-none print:max-h-none print:static print:w-full print:p-0 print:overflow-visible"
           >
 
-            {/* Top Controls Header */}
             <div className="p-4 bg-zinc-950 border-b border-zinc-800 flex items-center justify-between shrink-0 font-sans print:hidden">
               <div className="flex items-center space-x-2">
                 <FileText className="w-5 h-5 text-cyan-400" />
@@ -177,12 +175,9 @@ School Cafeteria Web Portal | Capstone
               </div>
             </div>
 
-            {/* Resume Content Paper View */}
             <div className="p-6 sm:p-10 overflow-y-auto space-y-6 text-slate-800 bg-white font-sans text-xs sm:text-sm custom-scrollbar print-paper-content print:p-0 print:m-0 print:bg-white print:text-black print:overflow-visible print:max-h-none print:h-auto">
 
-              {/* PAGE 1 CONTENT */}
               <div className="space-y-4">
-                {/* Header */}
                 <div className="text-center border-b-2 border-slate-800 pb-3 print:pb-2">
                   <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-wide uppercase">
                     CHRISTIAN MATTHEW P. DATOR
@@ -204,7 +199,6 @@ School Cafeteria Web Portal | Capstone
                   </div>
                 </div>
 
-                {/* Professional Summary */}
                 <div>
                   <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b border-slate-300 pb-1 mb-1.5">
                     PROFESSIONAL SUMMARY
@@ -214,14 +208,12 @@ School Cafeteria Web Portal | Capstone
                   </p>
                 </div>
 
-                {/* Work Experience */}
                 <div>
                   <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b border-slate-300 pb-1 mb-2">
                     WORK EXPERIENCE
                   </h3>
 
                   <div className="space-y-3">
-                    {/* Five Star Bus Co */}
                     <div>
                       <div className="flex justify-between items-baseline font-bold text-slate-900">
                         <span className="text-sm">Five Star Bus Company</span>
@@ -235,7 +227,6 @@ School Cafeteria Web Portal | Capstone
                       </ul>
                     </div>
 
-                    {/* National Children's Hospital */}
                     <div>
                       <div className="flex justify-between items-baseline font-bold text-slate-900">
                         <span className="text-sm">National Children's Hospital</span>
@@ -250,7 +241,6 @@ School Cafeteria Web Portal | Capstone
                   </div>
                 </div>
 
-                {/* Education */}
                 <div>
                   <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b border-slate-300 pb-1 mb-1.5">
                     EDUCATION
@@ -269,9 +259,7 @@ School Cafeteria Web Portal | Capstone
                 </div>
               </div>
 
-              {/* PAGE 2 CONTENT */}
               <div className="space-y-4 print-page-break-before pt-3 sm:pt-4 print:pt-6">
-                {/* Technical Skills */}
                 <div>
                   <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b border-slate-300 pb-1 mb-2">
                     TECHNICAL SKILLS
@@ -310,7 +298,6 @@ School Cafeteria Web Portal | Capstone
                   </ul>
                 </div>
 
-                {/* Projects */}
                 <div>
                   <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b border-slate-300 pb-1 mb-2">
                     PROJECTS

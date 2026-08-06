@@ -27,7 +27,6 @@
   }
 }
 
-/* Display name outline text */
 .text-outline {
   -webkit-text-stroke: 2px #0a0a0a;
   color: transparent;
@@ -38,7 +37,6 @@
   color: transparent;
 }
 
-/* Custom Scrollbar — light */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -57,7 +55,6 @@
   background: #737373;
 }
 
-/* Smooth hover lift */
 .card-hover {
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -67,7 +64,6 @@
   box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.12);
 }
 
-/* Add to your global stylesheet (e.g. index.css) */
 .typed-cursor {
   animation: blink 1s step-end infinite;
 }
@@ -84,12 +80,10 @@
   }
 }
 
-/* ─── Parallax Layer ────────────────────────────────────────────────────── */
 .parallax-bg {
   will-change: transform;
 }
 
-/* ─── Scroll Reveal Animation System (Ultra-Smooth Apple Style Easing) ──── */
 .reveal-init {
   opacity: 0;
   will-change: opacity, transform;
@@ -99,7 +93,6 @@
     box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Element-Specific Animation Variants */
 .reveal-heading {
   transform: translateY(28px) scale(0.98);
 }
@@ -136,13 +129,11 @@
   transform: scale(0.92);
 }
 
-/* Revealed Active State */
 .reveal-visible {
   opacity: 1 !important;
   transform: translate(0, 0) scale(1) rotate(0deg) !important;
 }
 
-/* Stagger Delays */
 .delay-75 {
   transition-delay: 75ms;
 }
@@ -171,7 +162,6 @@
   transition-delay: 600ms;
 }
 
-/* Legacy backward-compatibility class */
 .reveal-block {
   opacity: 0;
   transform: scale(0.98) translateY(18px);
@@ -185,13 +175,11 @@
   transform: scale(1) translateY(0);
 }
 
-/* ─── Magnetic Card / Button ────────────────────────────────────────────── */
 .magnetic-card,
 .magnetic-btn {
   will-change: transform;
 }
 
-/* ─── Glow Hover (instant on mouse-over, smooth release) ─────────────────── */
 .glow-hover {
   border-color: #d0d0c8;
   box-shadow: none;
@@ -208,7 +196,6 @@
     0 12px 32px -6px rgba(10, 10, 10, 0.12);
 }
 
-/* ─── Print Styles ────────────────────────────────────────────────────────── */
 @media print {
   @page {
     margin: 0;
@@ -270,7 +257,6 @@
   }
 }
 
-/* ─── Accessibility: reduced motion ────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
 
   .reveal-block,

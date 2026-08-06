@@ -1,10 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-/**
- * useParallax — moves an element at `speed` fraction of scroll offset.
- * speed: 0 = pinned, 1 = scrolls at full rate, 0.4 = background layer feel.
- * Uses RAF + passive scroll listener for 60fps with zero layout thrash.
- */
 export function useParallax(speed: number = 0.4) {
   const ref = useRef<HTMLElement | null>(null);
   const [offset, setOffset] = useState(0);
@@ -12,7 +7,6 @@ export function useParallax(speed: number = 0.4) {
   const lastScrollY = useRef(window.scrollY);
 
   useEffect(() => {
-    // Respect prefers-reduced-motion
     const query = window.matchMedia('(prefers-reduced-motion: reduce)');
     if (query.matches) return;
 
@@ -39,3 +33,4 @@ export function useParallax(speed: number = 0.4) {
 
   return { ref, style };
 }
+

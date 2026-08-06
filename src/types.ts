@@ -59,7 +59,7 @@ export interface SkillGroup {
   description: string;
   skills: {
     name: string;
-    level: number; // percentage
+    level: number;
     highlight?: boolean;
   }[];
 }

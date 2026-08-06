@@ -45,8 +45,6 @@ export const Navbar: React.FC<NavbarProps> = ({
     }
   };
 
-  // Scroll progress bar — GSAP ScrollTrigger scrub, consistent with the rest
-  // of the site's scroll-linked animations. No raw scroll listener involved.
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     if (!progressRef.current) return;
@@ -73,7 +71,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="sticky top-0 z-40 bg-[#f5f5f0]/90 backdrop-blur-md border-b border-[#e0e0d8]">
-      {/* Scroll progress bar */}
       <div
         ref={progressRef}
         className="absolute top-0 left-0 h-[2px] w-full bg-[#0a0a0a] origin-left"
@@ -83,9 +80,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
 
-        {/* Available Badge + Brand */}
         <div className="flex items-center gap-4 cursor-pointer" onClick={() => handleNavClick('hero')}>
-          {/* Availability dot badge */}
           <div className="hidden sm:flex items-center gap-1.5 text-xs font-medium text-[#0a0a0a] border border-[#d0d0c8] rounded-full px-3 py-1 bg-white/60">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
             <span>Available for Hire</span>
@@ -95,7 +90,6 @@ export const Navbar: React.FC<NavbarProps> = ({
           </span>
         </div>
 
-        {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-1">
           {navItems.map((item) => {
             const isActive = activeSection === item.id;
@@ -123,7 +117,6 @@ export const Navbar: React.FC<NavbarProps> = ({
           })}
         </nav>
 
-        {/* CTA */}
         <div className="flex items-center gap-2">
           <button
             onClick={onOpenResume}
@@ -134,7 +127,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             <ArrowUpRight className="w-3.5 h-3.5" />
           </button>
 
-          {/* Mobile hamburger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="md:hidden p-2 rounded-full text-[#0a0a0a] hover:bg-[#e5e5e0] transition-all"
@@ -145,7 +137,6 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
       </div>
 
-      {/* Mobile Navigation Drawer — animated mount/unmount instead of instant show/hide */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -187,3 +178,4 @@ export const Navbar: React.FC<NavbarProps> = ({
     </header>
   );
 };
+
